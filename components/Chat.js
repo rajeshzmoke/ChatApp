@@ -6,23 +6,26 @@ class Chat extends Component {
   state = {
     messages: []
   };
-  ComponentWillMmount() {}
-  ComponentDidMount() {
+  componentWillMount() {}
+
+  componentDidMount() {
+    console.log('inside component did Mount');
     Backend.loadMessages(message => {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }));
     });
   }
-  ComponentWillUnmount() {
+  componentWillUnmount() {
     Backend.closeChat();
   }
+
   render() {
     return (
       <GiftedChat
         messages={this.state.messages}
         onSend={message => {
-          Backend.sendMessages(message);
+          Backend.sendMessage(message);
         }}
         user={{
           _id: Backend.getUid(),

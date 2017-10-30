@@ -1,15 +1,14 @@
-import React from 'react';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 class Backend {
   uid = '';
   messagesRef = null;
   constructor() {
     firebase.initializeApp({
-      apiKey: '',
-      authDomain: '',
-      databaseURL: '',
-      storageBucket: ''
+      apiKey: 'AIzaSyAvKPtsqqqGjkGLkXD8BeqOR6GwJaI2AcE',
+      authDomain: 'chatapp-7c693.firebaseapp.com',
+      databaseURL: 'https://chatapp-7c693.firebaseio.com',
+      storageBucket: 'chatapp-7c693.appspot.com'
     });
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -23,6 +22,9 @@ class Backend {
           });
       }
     });
+  }
+  setUid(value) {
+    this.uid = value;
   }
   getUid() {
     return this.uid;
@@ -47,10 +49,11 @@ class Backend {
   }
   //send the message to the BAckend
   sendMessage(message) {
-    for (let index = 0; index < message.length; index++) {
+    console.log('message is ', message);
+    for (let i = 0; i < message.length; i++) {
       this.messagesRef.push({
-        text: message[index].text,
-        user: message[index].user,
+        text: message[i].text,
+        user: message[i].user,
         createdAt: firebase.database.ServerValue.TIMESTAMP
       });
     }
