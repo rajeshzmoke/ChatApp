@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 class Home extends Component {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   nameInput: {
     padding: 5,
     height: 40,
-    borderWidth: 2,
+    borderWidth: Platform.OS === 'ios' ? 2 : 0,
     borderColor: 'black',
     margin: 20
   },
