@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 class Home extends Component {
   state = {
     name: ''
   };
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text style={styles.title}>Enter Your Name :</Text>
@@ -22,7 +22,7 @@ class Home extends Component {
         />
         <TouchableOpacity
           onPress={() => {
-            Actions.chat({
+            navigate('Chat', {
               inputName: this.state.name
             });
           }}
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     marginLeft: 20,
-    fontSize: 20
+    fontSize: 18
   },
   nameInput: {
     padding: 5,
@@ -49,7 +49,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     marginLeft: 20,
-    fontSize: 20
+    width: 60,
+    height: 30,
+    textAlign: 'center',
+    fontSize: 20,
+    borderWidth: 2,
+    backgroundColor: '#4682b4'
   }
 });
 export default Home;
