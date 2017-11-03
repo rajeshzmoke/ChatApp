@@ -1,3 +1,6 @@
 {
-  "extends": "eslint-config-rallycoding"
+  "extends": "eslint-config-rallycoding",
+  "rules": {
+    "react/require-extension": "off"
+  }
 }
