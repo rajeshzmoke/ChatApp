@@ -1,5 +1,5 @@
-export function showName(name) {
-  return { type: 'SHOW_NAME', name };
+export function setNumber(number) {
+  return { type: 'SET_NUMBER', number };
 }
 
 export function setName(name) {

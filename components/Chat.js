@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { connect } from 'react-redux';
 import Backend from './Backend';
 
 class Chat extends Component {
-  state = {
-    messages: []
-  };
+  // state = {
+  //   messages: []
+  // };
   componentWillMount() {}
 
   componentDidMount() {
@@ -35,5 +36,12 @@ class Chat extends Component {
     );
   }
 }
+function mapStateToProps(state, ownProps) {
+  return {
+    nameR: state.name,
+    numberR: state.number,
+    messagesR: state.messagesR
+  };
+}
 
-export default Chat;
+export default connect(mapStateToProps)(Chat);

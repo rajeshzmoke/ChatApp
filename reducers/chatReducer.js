@@ -1,8 +1,12 @@
-export default function chatReducer(state = [], action) {
-  debugger;
+const initialState = {
+  name: '',
+  number: 0,
+  messages: []
+};
+export default function chatReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SHOW_NAME':
-      return [...state, action.name];
+    case 'SET_NUMBER':
+      return [...state, action.number];
     case 'SET_NAME':
       return [...state, action.name];
     default:
