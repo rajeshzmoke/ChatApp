@@ -1,3 +1,7 @@
-export function loadMessage(message) {
-    return { type: 'LOAD_MESSAGE', message };
+export function showName(name) {
+  return { type: 'SHOW_NAME', name };
+}
+
+export function setName(name) {
+  return { type: 'SET_NAME', name };
 }

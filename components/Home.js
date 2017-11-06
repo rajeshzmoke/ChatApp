@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { connect } from 'react-redux';
+import * as chatActions from '../actions/chatActions';
 
 class Home extends Component {
   state = {
     name: ''
   };
+  nameRow(name, index) {
+    debugger;
+    return <Text key={index}>{name}</Text>;
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -26,9 +33,13 @@ class Home extends Component {
               inputName: this.state.name
             });
           }}
+          /* onPress={() => {
+            this.props.dispatch(chatActions.showName(this.state.name));
+          }} */
         >
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
+        {this.props.nameR.map(this.nameRow)}
       </View>
     );
   }
@@ -57,4 +68,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#4682b4'
   }
 });
-export default Home;
+function mapStateToProps(state, ownProps) {
+  debugger;
+  return {
+    nameR: state.nameR
+  };
+}
+
+export default connect(mapStateToProps)(Home);
