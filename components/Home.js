@@ -5,10 +5,10 @@ import * as chatActions from '../actions/chatActions';
 
 class Home extends Component {
   state = {
-    name: ''
+    name: '',
+    number: null
   };
   nameRow(name, index) {
-    debugger;
     return <Text key={index}>{name}</Text>;
   }
 
@@ -17,6 +17,16 @@ class Home extends Component {
     return (
       <View>
         <Text style={styles.title}>Enter Your Number :</Text>
+        <TextInput
+          style={styles.nameInput}
+          placeholder="+91"
+          onChangeText={num => {
+            this.setState({
+              number: num
+            });
+          }}
+          value={this.state.number}
+        />
         <Text style={styles.title}>Enter Your Name :</Text>
         <TextInput
           style={styles.nameInput}
