@@ -16,6 +16,7 @@ class Home extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
+        <Text style={styles.title}>Enter Your Number :</Text>
         <Text style={styles.title}>Enter Your Name :</Text>
         <TextInput
           style={styles.nameInput}
