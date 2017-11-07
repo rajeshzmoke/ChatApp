@@ -12,7 +12,8 @@ const RootNavigation = StackNavigator({
   Chat: {
     screen: Chat,
     navigationOptions: ({ navigation }) => ({
-      title: `Chat ${navigation.state.params.inputName}`
+      title: 'Chat'
+      // ${navigation.state.params.inputName}
     })
   }
 });

@@ -4,51 +4,31 @@ import { connect } from 'react-redux';
 import * as chatActions from '../actions/chatActions';
 
 class Home extends Component {
-  // state = {
-  //   name: '',
-  //   number: null
-  // };
-  // nameRow(name, index) {
-  //   return <Text key={index}>{name}</Text>;
-  // }
+  constructor() {
+    super();
+    this.nextPressed = this.nextPressed.bind(this);
+  }
+  nextPressed() {
+    const { navigate } = this.props.navigation;
+    const userDetails = {
+      number: this.refs.numberField._lastNativeText, //get the value from the textinput
+      name: this.refs.nameField._lastNativeText
+    };
+    console.log(userDetails);
+    this.props.dispatch(chatActions.setName(userDetails));
+    navigate('Chat');
+  }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text style={styles.title}>Enter Your Number :</Text>
-        <TextInput
-          style={styles.nameInput}
-          placeholder="+91"
-          onChange={num => {
-            this.props.dispatch(chatActions.setNumber(num));
-          }}
-          value={this.props.numberR}
-        />
+        <TextInput ref="numberField" style={styles.nameInput} placeholder="+91" />
 
         <Text style={styles.title2}>Enter Your Name :</Text>
-        <TextInput
-          style={styles.nameInput}
-          placeholder="John Snow"
-          onChangeText={text => {
-            this.setState({
-              name: text
-            });
-          }}
-          value={this.props.nameR}
-        />
+        <TextInput ref="nameField" style={styles.nameInput} placeholder="John Snow" />
 
-        <TouchableOpacity
-          onPress={() => {
-            navigate('Chat', {
-              inputNumber: this.props.numberR,
-              inputName: this.props.nameR
-            });
-          }}
-          /* onPress={() => {
-            this.props.dispatch(chatActions.showName(this.state.name));
-          }} */
-        >
+        <TouchableOpacity onPress={this.nextPressed}>
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -83,12 +63,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#4682b4'
   }
 });
-function mapStateToProps(state, ownProps) {
-  return {
-    nameR: state.name,
-    numberR: state.number,
-    messagesR: state.messages
-  };
-}
 
-export default connect(mapStateToProps)(Home);
+export default connect(state => ({ home: state.chatReducer.chat }))(Home);
