@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import Home from './components/Home';
 import Chat from './components/Chat';
+import Group from './components/Group';
 
 const RootNavigation = StackNavigator({
   Home: {
@@ -8,6 +9,12 @@ const RootNavigation = StackNavigator({
     navigationOptions: {
       title: 'Join Anonymous Chat'
     }
+  },
+  Group: {
+    screen: Group,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Group'
+    })
   },
   Chat: {
     screen: Chat,

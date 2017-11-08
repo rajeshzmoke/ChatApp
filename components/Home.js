@@ -16,7 +16,7 @@ class Home extends Component {
     };
     console.log(userDetails);
     this.props.dispatch(chatActions.setName(userDetails));
-    navigate('Chat');
+    navigate('Group', userDetails.name);
   }
 
   render() {
@@ -27,16 +27,23 @@ class Home extends Component {
 
         <Text style={styles.title2}>Enter Your Name :</Text>
         <TextInput ref="nameField" style={styles.nameInput} placeholder="John Snow" />
-
-        <TouchableOpacity onPress={this.nextPressed}>
-          <Text style={styles.buttonText}>Next</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.buttonText} onPress={this.nextPressed}>
+            <Text>Next</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonText}>
+            <Text> Signup</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row'
+  },
   title: {
     marginTop: 20,
     marginLeft: 20,
@@ -54,11 +61,9 @@ const styles = StyleSheet.create({
     margin: 10
   },
   buttonText: {
-    marginLeft: 20,
-    width: 60,
-    height: 30,
-    textAlign: 'center',
-    fontSize: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    margin: 10,
     borderWidth: 2,
     backgroundColor: '#4682b4'
   }

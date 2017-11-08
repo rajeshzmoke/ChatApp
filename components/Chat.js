@@ -5,9 +5,13 @@ import * as chatActions from '../actions/chatActions';
 import Backend from './Backend';
 
 class Chat extends Component {
-  state = {
-    messages: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: []
+    };
+  }
+
   componentWillMount() {}
 
   componentDidMount() {
