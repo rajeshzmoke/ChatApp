@@ -1,5 +1,3 @@
-import { GiftedChat } from 'react-native-gifted-chat';
-
 const initialState = {
   chat: {
     name: '',
@@ -15,7 +13,7 @@ export default function chatReducer(state = initialState, action) {
       };
     case 'SET_MESSAGE':
       return {
-        chat: { ...state.chat, messages: [...state.chat.messages, action.messages] }
+        chat: { ...state.chat, messages: [action.messages] }
       };
     case 'SET_NAME':
       return {
