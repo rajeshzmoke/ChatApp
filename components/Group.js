@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 //import firebase from 'react-native-firebase';
 
@@ -12,7 +12,14 @@ class Group extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <TouchableOpacity style={styles.groupButton} onPress={() => navigate('')}>
+          <TextInput ref="GroupName" placeholder="Enter Group name" />
+          <TouchableOpacity
+            style={styles.groupButton}
+            onPress={() =>
+              navigate('GroupUsers', {
+                grpName: this.refs.GroupName._lastNativeText
+              })}
+          >
             <Text>ADD GROUP</Text>
           </TouchableOpacity>
         </View>
