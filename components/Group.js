@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Platform
+} from 'react-native';
 
 class Group extends Component {
   state = {
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: Platform.OS === 'ios' ? 10 : 15,
     margin: 5,
     borderWidth: 2,
     backgroundColor: '#a9a9a9'
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     flex: 2,
     margin: 5,
-    borderWidth: 2
+    borderWidth: Platform.OS === 'ios' ? 2 : 0
     // justifyContent: 'stretch'
   }
 });
