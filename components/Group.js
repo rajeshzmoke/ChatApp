@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-//import firebase from 'react-native-firebase';
 
 class Group extends Component {
   state = {
@@ -9,40 +7,48 @@ class Group extends Component {
   };
   render() {
     const { navigate } = this.props.navigation;
+    const { state } = this.props.navigation;
     return (
       <ScrollView>
         <View style={styles.container}>
-          <TextInput ref="GroupName" placeholder="Enter Group name" />
+          <TextInput ref="GroupName" placeholder="Enter Group name" style={styles.inputStyle} />
           <TouchableOpacity
             style={styles.groupButton}
             onPress={() =>
-              navigate('GroupUsers', {
-                grpName: this.refs.GroupName._lastNativeText
+              navigate('Chat', {
+                grpName: this.refs.GroupName._lastNativeText || 'A Grp has noName'
               })}
           >
             <Text>ADD GROUP</Text>
+            {console.log(state.params.userDetails.number)}
           </TouchableOpacity>
         </View>
 
         <Text>{}</Text>
-        <TouchableOpacity onPress={() => navigate('Chat')}>
-          <Text>Go to chat</Text>
-        </TouchableOpacity>
+
+        <Text>Add Group to Start Chatting {state.params.userDetails.name}</Text>
       </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'flex-end',
     flexDirection: 'row'
   },
   groupButton: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 20,
     margin: 5,
     borderWidth: 2,
     backgroundColor: '#a9a9a9'
+  },
+  inputStyle: {
+    flex: 2,
+    margin: 5,
+    borderWidth: 2
+    // justifyContent: 'stretch'
   }
 });
 export default Group;

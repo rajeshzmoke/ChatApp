@@ -9,14 +9,18 @@ class Home extends Component {
     this.nextPressed = this.nextPressed.bind(this);
   }
   nextPressed() {
+    //debugger;
     const { navigate } = this.props.navigation;
     const userDetails = {
       number: this.refs.numberField._lastNativeText, //get the value from the textinput
       name: this.refs.nameField._lastNativeText
     };
-    console.log(userDetails);
+    console.log(userDetails.name);
     this.props.dispatch(chatActions.setName(userDetails));
-    navigate('Group', userDetails.name);
+    navigate('Group', {
+      //name: this.refs.nameField._lastNativeText,
+      userDetails
+    });
   }
 
   render() {

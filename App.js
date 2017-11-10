@@ -7,28 +7,26 @@ import grpUsers from './components/grpUsers';
 const RootNavigation = StackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       title: 'Join Anonymous Chat'
-    }
+    })
   },
   Group: {
     screen: Group,
     navigationOptions: ({ navigation }) => ({
-      title: 'Group'
+      title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`
     })
   },
   Chat: {
     screen: Chat,
     navigationOptions: ({ navigation }) => ({
-      title: 'Chat'
-      // ${navigation.state.params.inputName}
+      title: `${navigation.state.params.grpName}`
     })
   },
   GroupUsers: {
     screen: grpUsers,
     navigationOptions: ({ navigation }) => ({
-      screenProps: navigation.state.params.grpName,
-      title: `${navigation.state.params.grpName} Group`
+      title: ''
     })
   }
 });
