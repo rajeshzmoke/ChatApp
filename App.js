@@ -8,7 +8,7 @@ const RootNavigation = StackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      title: 'Join Anonymous Chat'
+      //header: null
     })
   },
   Group: {
