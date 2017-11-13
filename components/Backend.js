@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+//import firebase from 'react-native-firebase';
 
 class Backend {
   uid = '';
@@ -49,7 +50,6 @@ class Backend {
   }
   //send the message to the BAckend
   sendMessage(message) {
-    console.log('message is ', message);
     for (let i = 0; i < message.length; i++) {
       this.messagesRef.push({
         text: message[i].text,

@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { connect } from 'react-redux';
 import Backend from './Backend';
 
 class Chat extends Component {
-  state = {
-    messages: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      isLoadingEarlier: false
+    };
+  }
+
   componentWillMount() {}
 
   componentDidMount() {
-    console.log('inside component did Mount');
     Backend.loadMessages(message => {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }));
+    });
+    this.setState({
+      isLoadingEarlier: true
     });
   }
   componentWillUnmount() {
@@ -27,13 +36,14 @@ class Chat extends Component {
         onSend={message => {
           Backend.sendMessage(message);
         }}
+        isLoadingEarlier={this.state.isLoadingEarlier}
         user={{
           _id: Backend.getUid(),
-          name: this.props.inputName
+          name: this.props.chat.name
         }}
       />
     );
   }
 }
 
-export default Chat;
+export default connect(state => ({ chat: state.chatReducer.chat }))(Chat);
