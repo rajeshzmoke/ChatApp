@@ -38,7 +38,7 @@ class Group extends Component {
               <Title style={{ color: 'black' }}>Welcome</Title>
             </Body>
             <Right>
-              <Button small danger style={{ marginTop: 15 }}>
+              <Button rounded small danger style={{ marginTop: 15 }}>
                 <Text>Signout</Text>
               </Button>
             </Right>
@@ -55,6 +55,7 @@ class Group extends Component {
               </Item>
             </Left>
             <Button
+              rounded
               primary
               style={styles.groupButton}
               onPress={() =>

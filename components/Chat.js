@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import GiftedChat from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import Backend from './Backend';
 
