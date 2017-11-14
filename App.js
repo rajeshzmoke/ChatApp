@@ -1,5 +1,3 @@
-import React from 'react';
-// import { Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Home from './components/Home';
 import Chat from './components/Chat';
@@ -17,8 +15,8 @@ const RootNavigation = StackNavigator(
     Group: {
       screen: Group,
       navigationOptions: ({ navigation }) => ({
-        title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`
-        //headerLeft: <Group nav={navigation} />
+        title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`,
+        header: null
       })
     },
     Chat: {

@@ -16,11 +16,6 @@ import {
 import { Row } from 'react-native-easy-grid';
 
 class Group extends Component {
-  static navigationOptions = {
-    header: null
-    //headerLeft: <Button onPress={this.goBack} />
-  };
-
   state = {
     grpName: '',
     groups: []

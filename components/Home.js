@@ -14,7 +14,7 @@ import {
   Title,
   Label
 } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import * as chatActions from '../actions/chatActions';
 
@@ -100,9 +100,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     margin: 10
-    // borderWidth: 2,
-    // borderColor: 'black',
-    // backgroundColor: '#a9a9a9'
   }
 });
 
