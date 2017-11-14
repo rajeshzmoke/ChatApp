@@ -18,18 +18,18 @@ import { Row } from 'react-native-easy-grid';
 class Group extends Component {
   static navigationOptions = {
     header: null
+    //headerLeft: <Button onPress={this.goBack} />
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      grpName: '',
-      groups: []
-    };
-  }
+
+  state = {
+    grpName: '',
+    groups: []
+  };
 
   render() {
     const { navigate } = this.props.navigation;
     const { state } = this.props.navigation;
+    const { goBack } = this.props.navigation;
     return (
       <Container>
         <Header style={styles.title}>
@@ -38,7 +38,7 @@ class Group extends Component {
               <Title style={{ color: 'black' }}>Welcome</Title>
             </Body>
             <Right>
-              <Button rounded small danger style={{ marginTop: 15 }}>
+              <Button rounded small danger style={{ marginTop: 15 }} onPress={() => goBack()}>
                 <Text>Signout</Text>
               </Button>
             </Right>
@@ -81,19 +81,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#c0c0c0'
   },
   groupButton: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // paddingVertical: Platform.OS === 'ios' ? 10 : 15,
     margin: 10
-    // borderWidth: 2,
-    // backgroundColor: '#a9a9a9'
   },
   inputStyle: {
     flex: 2,
     margin: 5,
     borderWidth: Platform.OS === 'ios' ? 2 : 0
-    // justifyContent: 'stretch'
   }
 });
 export default Group;
