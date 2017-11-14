@@ -17,6 +17,9 @@ import {
 import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import * as chatActions from '../actions/chatActions';
+import { getFireBase } from '../components/FireHelper';
+
+const firebase = getFireBase();
 
 class Home extends Component {
   static navigationOptions = {
@@ -43,6 +46,9 @@ class Home extends Component {
       userDetails
     });
   };
+  otpCode = () => {
+    this.props.navigation.navigate('ConfirmCode');
+  };
 
   render() {
     return (
@@ -68,7 +74,7 @@ class Home extends Component {
               <Icon name="arrow-forward" />
               <Text>Next</Text>
             </Button>
-            <Button rounded danger style={styles.buttonText}>
+            <Button rounded danger style={styles.buttonText} onPress={this.otpCode}>
               <Text> Signup</Text>
             </Button>
           </Grid>

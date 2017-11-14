@@ -62,7 +62,7 @@ class Group extends Component {
             </Button>
           </Row>
           <Text>{}</Text>
-          <Text>Add Group to Start Chatting {state.params.userDetails.name}</Text>
+          <Text>Add Group to Start Chatting {/*{state.params.userDetails.name}*/}</Text>
         </Content>
       </Container>
     );

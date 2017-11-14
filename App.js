@@ -2,7 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import Group from './components/Group';
-import grpUsers from './components/grpUsers';
+import ConfirmCode from './components/ConfirmCode';
 
 const RootNavigation = StackNavigator(
   {
@@ -15,7 +15,7 @@ const RootNavigation = StackNavigator(
     Group: {
       screen: Group,
       navigationOptions: ({ navigation }) => ({
-        title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`,
+        //title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`,
         header: null
       })
     },
@@ -25,10 +25,10 @@ const RootNavigation = StackNavigator(
         title: `${navigation.state.params.grpName}`
       })
     },
-    GroupUsers: {
-      screen: grpUsers,
+    ConfirmCode: {
+      screen: ConfirmCode,
       navigationOptions: ({ navigation }) => ({
-        title: ''
+        header: null
       })
     }
   },

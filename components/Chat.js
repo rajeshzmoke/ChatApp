@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import Backend from './Backend';
@@ -35,6 +36,7 @@ class Chat extends Component {
         onSend={message => {
           Backend.sendMessage(message);
         }}
+        isLoadingEarlier={this.state.isLoadingEarlier}
         user={{
           _id: Backend.getUid(),
           name: this.props.chat.name
