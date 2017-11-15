@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Container,
   Header,
@@ -17,8 +17,40 @@ import {
 import { Row, Col, Grid } from 'react-native-easy-grid';
 
 class ConfirmCode extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      codeInput: ''
+    };
+  }
+
+  confirmCode = () => {
+    console.log('in confirm code');
+    const confirmResult = this.props.navigation.state.params.home;
+    console.log(this.props.navigation.state.params.home);
+    console.log('in confirm res');
+    const { codeInput } = this.state;
+    if (confirmResult && codeInput.length) {
+      confirmResult
+        .confirm(codeInput)
+        .then(user => {
+          this.setState({ message: 'Code Confirmed!' });
+          this.props.navigation.navigate('Group', {
+            userDetails: {
+              number: '+918892468991', //this.refs.numberField._lastNativeText, //get the value from the textinput
+              name: 'Swap' //this.refs.nameField._lastNativeText
+            }
+          });
+        })
+        .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
+    }
+  };
+
   render() {
     const { goBack } = this.props.navigation;
+    console.log('====================================');
+    console.log(this.props.navigation.state.params.home);
+    console.log('====================================');
     return (
       <Container>
         <Header style={styles.title}>
@@ -37,19 +69,11 @@ class ConfirmCode extends Component {
           <Item style={{ borderColor: 'black' }}>
             <Input
               style={{ textAlign: 'center' }}
-              placeholder="Enter Group name"
-              onChangeText={text => this.setState({ grpName: text })}
+              placeholder="Enter OTP"
+              onChangeText={text => this.setState({ codeInput: text })}
             />
           </Item>
-          <Button
-            rounded
-            primary
-            style={styles.groupButton}
-            onPress={() =>
-              this.props.navigation.navigate('Group', {
-                grpName: 'Zmoke' //this.refs.GroupName._lastNativeText || 'A Grp has noName'
-              })}
-          >
+          <Button rounded primary style={styles.groupButton} onPress={this.confirmCode}>
             <Text> Confirm OTP </Text>
           </Button>
 

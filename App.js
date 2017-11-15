@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, NavigationActions } from 'react-navigation';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import Group from './components/Group';

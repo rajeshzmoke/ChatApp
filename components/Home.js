@@ -25,29 +25,82 @@ class Home extends Component {
   static navigationOptions = {
     header: null
   };
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
+    this.unsubscribe = null;
     this.state = {
-      number: '',
+      user: null,
+      message: '',
+      codeInput: '',
+      phoneNumber: '+91',
+      confirmResult: null,
       name: ''
     };
   }
 
-  nextPressed = () => {
-    const { navigate } = this.props.navigation;
-    const userDetails = {
-      number: this.state.number, //this.refs.numberField._lastNativeText, //get the value from the textinput
-      name: this.state.name //this.refs.nameField._lastNativeText
-    };
-    console.log(userDetails);
-    this.props.dispatch(chatActions.setName(userDetails));
-    navigate('Group', {
-      //name: this.refs.nameField._lastNativeText,
-      userDetails
+  componentDidMount() {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('====================================');
+        console.log('auto check');
+        console.log('====================================');
+      } else {
+        // User has been signed out, reset the state
+        this.setState({
+          user: null,
+          message: '',
+          codeInput: '',
+          phoneNumber: '+91',
+          confirmResult: null,
+          name: ''
+        });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) this.unsubscribe();
+  }
+
+  signIn = () => {
+    console.log('in sign in');
+
+    const { phoneNumber } = this.state;
+    console.log(phoneNumber);
+    this.setState({ message: 'Sending code ...' });
+    firebase
+      .auth()
+      .signInWithPhoneNumber(phoneNumber)
+      .then(confirmResult => {
+        console.log('in 1');
+        this.setState({ confirmResult, message: 'Code has been sent!' });
+        console.log(this.state.user);
+
+        this.props.navigation.navigate('ConfirmCode', { home: this.state.confirmResult });
+        console.log('in 3');
+      })
+      .catch(error =>
+        this.setState({ message: `Sign In With Phone Number Error: ${error.message}` })
+      );
   };
+
+  // nextPressed = () => {
+  //   const { navigate } = this.props.navigation;
+  //   const userDetails = {
+  //     number: this.state.number, //this.refs.numberField._lastNativeText, //get the value from the textinput
+  //     name: this.state.name //this.refs.nameField._lastNativeText
+  //   };
+  //   console.log(userDetails);
+  //   this.props.dispatch(chatActions.setName(userDetails));
+  //   navigate('Group', {
+  //     //name: this.refs.nameField._lastNativeText,
+  //     userDetails
+  //   });
+  // };
+
   otpCode = () => {
-    this.props.navigation.navigate('ConfirmCode');
+    this.props.navigation.navigate('ConfirmCode', { Home: this.state });
   };
 
   render() {
@@ -61,7 +114,11 @@ class Home extends Component {
         <Form>
           <Item floatingLabel>
             <Label>Phone Number</Label>
-            <Input onChangeText={text => this.setState({ number: text })} />
+            <Input
+              autoFocus
+              onChangeText={value => this.setState({ phoneNumber: value })}
+              value={this.state.phoneNumber}
+            />
           </Item>
           <Item floatingLabel last>
             <Label>Enter Name</Label>
@@ -70,7 +127,7 @@ class Home extends Component {
         </Form>
         <Content>
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.nextPressed}>
+            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
               <Icon name="arrow-forward" />
               <Text>Next</Text>
             </Button>

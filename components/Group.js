@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+
 import {
   Container,
   Header,
@@ -14,6 +16,11 @@ import {
   Right
 } from 'native-base';
 import { Row } from 'react-native-easy-grid';
+
+const navigateAction = NavigationActions.navigate({
+  routeName: 'Home',
+  action: NavigationActions.navigate({ routeName: 'Group' })
+});
 
 class Group extends Component {
   state = {
@@ -33,7 +40,13 @@ class Group extends Component {
               <Title style={{ color: 'black' }}>Welcome</Title>
             </Body>
             <Right>
-              <Button rounded small danger style={{ marginTop: 15 }} onPress={() => goBack()}>
+              <Button
+                rounded
+                small
+                danger
+                style={{ marginTop: 15 }}
+                onPress={() => this.props.navigation.dispatch(navigateAction)}
+              >
                 <Text>Signout</Text>
               </Button>
             </Right>
