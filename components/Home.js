@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform } from 'react-native';
 import {
   Container,
   Header,
@@ -18,6 +18,7 @@ import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import * as chatActions from '../actions/chatActions';
 import { getFireBase } from '../components/FireHelper';
+import imageurl from '../components/images/ice.jpg';
 
 const firebase = getFireBase();
 
@@ -51,7 +52,7 @@ class Home extends Component {
           user: null,
           message: '',
           codeInput: '',
-          phoneNumber: '+91',
+          phoneNumber: '',
           confirmResult: null,
           name: ''
         });
@@ -85,49 +86,44 @@ class Home extends Component {
       );
   };
 
-  // nextPressed = () => {
-  //   const { navigate } = this.props.navigation;
-  //   const userDetails = {
-  //     number: this.state.number, //this.refs.numberField._lastNativeText, //get the value from the textinput
-  //     name: this.state.name //this.refs.nameField._lastNativeText
-  //   };
-  //   console.log(userDetails);
-  //   this.props.dispatch(chatActions.setName(userDetails));
-  //   navigate('Group', {
-  //     //name: this.refs.nameField._lastNativeText,
-  //     userDetails
-  //   });
-  // };
-
   otpCode = () => {
     this.props.navigation.navigate('ConfirmCode', { Home: this.state });
   };
 
+  goToConfirmCode = () => {
+    this.props.navigation.navigate('ConfirmCode', {
+      home: this.state.confirmResult,
+      details: this.state
+    });
+  };
+
   render() {
     return (
-      <Container>
-        <Header style={styles.title}>
+      <Container style={styles.container}>
+        <Image style={styles.imageContainer} source={imageurl} />
+        <Header style={styles.header}>
           <Body>
             <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
           </Body>
         </Header>
-        <Form>
-          <Item floatingLabel>
-            <Label>Phone Number</Label>
-            <Input
-              autoFocus
-              onChangeText={value => this.setState({ phoneNumber: value })}
-              value={this.state.phoneNumber}
-            />
-          </Item>
-          <Item floatingLabel last>
-            <Label>Enter Name</Label>
-            <Input onChangeText={text => this.setState({ name: text })} />
-          </Item>
-        </Form>
-        <Content>
+        <Content style={{ height: '100%' }}>
+          <Form>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Phone Number</Label>
+              <Input
+                autoFocus
+                onChangeText={value => this.setState({ phoneNumber: value })}
+                value={this.state.phoneNumber}
+              />
+            </Item>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Enter Name</Label>
+              <Input onChangeText={text => this.setState({ name: text })} />
+            </Item>
+          </Form>
+
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
+            <Button rounded success style={styles.buttonText} onPress={this.goToConfirmCode}>
               <Icon name="arrow-forward" />
               <Text>Next</Text>
             </Button>
@@ -143,10 +139,18 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    backgroundColor: '#dcdcdc'
   },
-  title: {
-    backgroundColor: '#c0c0c0'
+  imageContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%'
+  },
+  header: {
+    backgroundColor: '#f8f8ff'
   },
   title2: {
     marginLeft: 20,

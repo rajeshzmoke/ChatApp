@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Container,
-  Header,
-  Body,
-  Content,
-  Button,
-  Text,
-  Item,
-  Input,
-  Title,
-  Left,
-  Right
-} from 'native-base';
+import { Image, StyleSheet } from 'react-native';
+import { Container, Header, Content, Button, Text, Item, Icon, Input, Title } from 'native-base';
 
 import { Row, Col, Grid } from 'react-native-easy-grid';
+import imageurl from '../components/images/ice.jpg';
 
 class ConfirmCode extends Component {
   constructor(props) {
@@ -45,35 +34,44 @@ class ConfirmCode extends Component {
         .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
     }
   };
+  goToGroups = () => {
+    this.props.navigation.navigate('Group', {
+      name: this.props.navigation.state.params.details.name
+    });
+  };
 
   render() {
     const { goBack } = this.props.navigation;
     console.log('====================================');
-    console.log(this.props.navigation.state.params.home);
+    console.log(this.props.navigation.state.params.details.number);
     console.log('====================================');
     return (
-      <Container>
+      <Container style={{ backgroundColor: '#dcdcdc' }}>
+        <Image style={styles.imageContainer} source={imageurl} />
         <Header style={styles.title}>
           <Row>
-            <Left>
-              <Button rounded small danger style={{ marginTop: 15 }} onPress={() => goBack()}>
-                <Text>Cancel</Text>
-              </Button>
-            </Left>
-            <Body>
-              <Title style={{ color: 'black' }}>Confirm OTP</Title>
-            </Body>
+            <Button transparent onPress={() => goBack()}>
+              <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
+            </Button>
+
+            <Title style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
+              {`OTP sent for ${this.props.navigation.state.params.details.phoneNumber}`}
+            </Title>
+
+            {/* <Right /> */}
           </Row>
         </Header>
-        <Content contentContainerStyle={{ flex: 1, justifyContent: 'center' }}>
-          <Item style={{ borderColor: 'black' }}>
+        <Content contentContainerStyle={{ marginVertical: 200 }}>
+          <Item
+            style={{ marginLeft: 'auto', marginRight: 'auto', width: 200, borderColor: 'black' }}
+          >
             <Input
               style={{ textAlign: 'center' }}
               placeholder="Enter OTP"
               onChangeText={text => this.setState({ codeInput: text })}
             />
           </Item>
-          <Button rounded primary style={styles.groupButton} onPress={this.confirmCode}>
+          <Button rounded primary style={styles.groupButton} onPress={this.goToGroups}>
             <Text> Confirm OTP </Text>
           </Button>
 
@@ -87,8 +85,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row'
   },
+  imageContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%'
+  },
   title: {
-    backgroundColor: '#c0c0c0'
+    flexDirection: 'row',
+    backgroundColor: '#f8f8ff'
   },
   groupButton: {
     margin: 10,

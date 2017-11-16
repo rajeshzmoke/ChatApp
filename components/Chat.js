@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
+import {
+  Container,
+  Header,
+  Body,
+  Content,
+  Button,
+  Text,
+  Item,
+  Input,
+  Title,
+  Left,
+  Icon,
+  Fab
+} from 'native-base';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
+import { Row } from 'react-native-easy-grid';
+
 import Backend from './Backend';
 
 class Chat extends Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -31,17 +50,30 @@ class Chat extends Component {
 
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={message => {
-          Backend.sendMessage(message);
-        }}
-        isLoadingEarlier={this.state.isLoadingEarlier}
-        user={{
-          _id: Backend.getUid(),
-          name: this.props.chat.name
-        }}
-      />
+      <Container>
+        <Header>
+          <Row>
+            {/* <Left /> */}
+            <Body>
+              <Title style={{ color: 'black' }}>
+                Welcome {this.props.navigation.state.params.name}
+              </Title>
+            </Body>
+            {/* <Right /> */}
+          </Row>
+        </Header>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={message => {
+            Backend.sendMessage(message);
+          }}
+          isLoadingEarlier={this.state.isLoadingEarlier}
+          user={{
+            _id: Backend.getUid(),
+            name: this.props.chat.name
+          }}
+        />
+      </Container>
     );
   }
 }

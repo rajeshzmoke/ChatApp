@@ -32,7 +32,7 @@ class Backend {
   }
   //retrieve messages from the backend
   loadMessages(callback) {
-    this.messagesRef = firebase.database().ref('messages');
+    this.messagesRef = firebase.database().ref('anonymous');
     this.messagesRef.off();
     const onReceive = data => {
       const message = data.val();
