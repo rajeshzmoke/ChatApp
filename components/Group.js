@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-
+import { getFireBase } from '../components/FireHelper';
+import { Row } from 'react-native-easy-grid';
 import {
   Container,
   Header,
@@ -13,17 +14,22 @@ import {
   Input,
   Title,
   Left,
+  Right,
+  Thumbnail,
   Icon,
-  Fab
+  Fab,
+  List,
+  ListItem
 } from 'native-base';
-import { Row } from 'react-native-easy-grid';
 import imageurl from '../components/images/ice.jpg';
+import reactImage from '../components/images/img1.jpg';
+import AnonymousFace from './images/face.jpg';
 
 const navigateAction = NavigationActions.navigate({
   routeName: 'Home',
   action: NavigationActions.navigate({ routeName: 'Group' })
 });
-
+const firebase = getFireBase();
 class Group extends Component {
   state = {
     grpName: '',
@@ -32,6 +38,7 @@ class Group extends Component {
   };
 
   signOut = () => {
+    firebase.auth().signOut();
     this.props.navigation.dispatch(navigateAction);
     this.setState({
       active: !this.state.active
@@ -40,46 +47,67 @@ class Group extends Component {
   render() {
     const { navigate } = this.props.navigation;
     const { state } = this.props.navigation;
-    const { goBack } = this.props.navigation;
+    //const { goBack } = this.props.navigation;
+    const items = [
+      'Mobile Development',
+      'React Native Developers',
+      'ios Developers',
+      'Android Developers',
+      'React Web developers'
+    ];
     return (
       <Container>
         <Image style={styles.imageContainer} source={imageurl} />
-        <Header style={styles.title}>
+        <Header style={styles.header}>
           <Row>
-            {/* <Left /> */}
             <Body>
-              <Title style={{ color: 'black' }}>
-                Welcome {this.props.navigation.state.params.name}
-              </Title>
+              <Title style={{ color: 'black' }}>Welcome {state.params.name}</Title>
             </Body>
-            {/* <Right /> */}
           </Row>
         </Header>
         <Content>
           <Row>
-            <Left>
-              <Item>
+            <Left style={{ paddingLeft: 10 }}>
+              <Item style={{ width: 240, borderBottomColor: 'black' }}>
                 <Input
+                  style={{ justifyContent: 'center' }}
                   placeholder="Enter Group name"
                   onChangeText={text => this.setState({ grpName: text })}
                 />
               </Item>
             </Left>
-            <Button
-              rounded
-              primary
-              style={styles.groupButton}
-              onPress={() =>
-                navigate('Chat', {
-                  grpName: 'Zmoke' //this.refs.GroupName._lastNativeText || 'A Grp has noName'
-                })}
-            >
-              <Text> Add Group </Text>
-            </Button>
+            {/* <Body /> */}
+            <Right>
+              <Button
+                small
+                rounded
+                dark
+                style={styles.groupButton}
+                onPress={() =>
+                  navigate('Chat', {
+                    grpName: this.state.grpName || 'A Grp has noName'
+                  })}
+              >
+                {/* <Image source={AnonymousFace} style={{ width: 100, height: 30 }} /> */}
+                <Text style={{ fontWeight: '500' }}> Add Group </Text>
+              </Button>
+            </Right>
           </Row>
           <Text>{}</Text>
-          <Text>Add Group to Start Chatting {/*{state.params.userDetails.name}*/}</Text>
         </Content>
+        <View style={{ flex: 5, alignContent: 'stretch' }}>
+          <List
+            dataArray={items}
+            renderRow={item => (
+              <ListItem avatar style={{ padding: 5, backgroundColor: 'transparent' }}>
+                <Thumbnail circular source={reactImage} />
+                <Body>
+                  <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>{item} </Text>
+                </Body>
+              </ListItem>
+            )}
+          />
+        </View>
         <Fab
           active={!this.state.active}
           direction="up"
@@ -88,9 +116,9 @@ class Group extends Component {
           position="bottomRight"
           onPress={() => this.setState({ active: !this.state.active })}
         >
-          <Icon name="share" />
+          <Icon name="navigate" />
           <Button style={{ backgroundColor: '#34A34F' }} onPress={this.signOut}>
-            <Icon name="exit" />
+            <Icon name="log-out" />
           </Button>
           <Button style={{ backgroundColor: '#3B5998' }}>
             <Icon name="contact" />
@@ -115,20 +143,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  title: {
-    backgroundColor: '#c0c0c0'
+  header: {
+    backgroundColor: '#f8f8ff'
   },
   groupButton: {
     margin: 10
-  },
-  signOut: {
-    marginLeft: 'auto',
-    margin: 15
-  },
-  inputStyle: {
-    flex: 2,
-    margin: 5,
-    borderWidth: Platform.OS === 'ios' ? 2 : 0
   }
 });
 export default Group;

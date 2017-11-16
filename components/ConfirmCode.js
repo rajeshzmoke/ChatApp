@@ -26,8 +26,7 @@ class ConfirmCode extends Component {
           this.setState({ message: 'Code Confirmed!' });
           this.props.navigation.navigate('Group', {
             userDetails: {
-              number: '+918892468991', //this.refs.numberField._lastNativeText, //get the value from the textinput
-              name: 'Swap' //this.refs.nameField._lastNativeText
+              name: this.props.navigation.state.params.details.name
             }
           });
         })
@@ -71,8 +70,8 @@ class ConfirmCode extends Component {
               onChangeText={text => this.setState({ codeInput: text })}
             />
           </Item>
-          <Button rounded primary style={styles.groupButton} onPress={this.goToGroups}>
-            <Text> Confirm OTP </Text>
+          <Button rounded dark style={styles.groupButton} onPress={this.goToGroups}>
+            <Text style={{ fontWeight: '400' }}> Confirm OTP </Text>
           </Button>
 
           <Text>{}</Text>

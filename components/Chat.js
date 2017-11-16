@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
   Container,
   Header,
@@ -17,7 +17,6 @@ import {
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import { Row } from 'react-native-easy-grid';
-
 import Backend from './Backend';
 
 class Chat extends Component {
@@ -49,14 +48,17 @@ class Chat extends Component {
   }
 
   render() {
+    const { goBack } = this.props.navigation;
     return (
-      <Container>
+      <Container style={styles.chatContainer}>
         <Header>
           <Row>
-            {/* <Left /> */}
+            <Button transparent onPress={() => goBack()}>
+              <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
+            </Button>
             <Body>
-              <Title style={{ color: 'black' }}>
-                Welcome {this.props.navigation.state.params.name}
+              <Title style={{ marginRight: 'auto', color: 'black' }}>
+                {this.props.navigation.state.params.grpName} Chat
               </Title>
             </Body>
             {/* <Right /> */}
@@ -77,5 +79,9 @@ class Chat extends Component {
     );
   }
 }
-
+const styles = StyleSheet.create({
+  chatContainer: {
+    backgroundColor: '#B8DBEE'
+  }
+});
 export default connect(state => ({ chat: state.chatReducer.chat }))(Chat);

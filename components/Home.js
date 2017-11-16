@@ -78,7 +78,10 @@ class Home extends Component {
         this.setState({ confirmResult, message: 'Code has been sent!' });
         console.log(this.state.user);
 
-        this.props.navigation.navigate('ConfirmCode', { home: this.state.confirmResult });
+        this.props.navigation.navigate('ConfirmCode', {
+          home: this.state.confirmResult,
+          details: this.state
+        });
         console.log('in 3');
       })
       .catch(error =>
