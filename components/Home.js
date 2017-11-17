@@ -52,7 +52,7 @@ class Home extends Component {
           user: null,
           message: '',
           codeInput: '',
-          phoneNumber: '',
+          phoneNumber: '+91',
           confirmResult: null,
           name: ''
         });
@@ -66,10 +66,10 @@ class Home extends Component {
 
   signIn = () => {
     console.log('in sign in');
-
     const { phoneNumber } = this.state;
     console.log(phoneNumber);
     this.setState({ message: 'Sending code ...' });
+
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber)
@@ -90,7 +90,7 @@ class Home extends Component {
   };
 
   otpCode = () => {
-    this.props.navigation.navigate('ConfirmCode', { Home: this.state });
+    this.props.navigation.navigate('ConfirmCode', { details: this.state });
   };
 
   goToConfirmCode = () => {
@@ -114,7 +114,7 @@ class Home extends Component {
             <Item floatingLabel style={{ borderBottomColor: 'black' }}>
               <Label>Phone Number</Label>
               <Input
-                autoFocus
+                //autoFocus
                 onChangeText={value => this.setState({ phoneNumber: value })}
                 value={this.state.phoneNumber}
               />
@@ -126,9 +126,9 @@ class Home extends Component {
           </Form>
 
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.goToConfirmCode}>
-              <Icon name="arrow-forward" />
+            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
               <Text>Next</Text>
+              <Icon name="arrow-forward" />
             </Button>
             <Button rounded danger style={styles.buttonText} onPress={this.otpCode}>
               <Text> Signup</Text>
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#f8f8ff'
+    backgroundColor: '#87cefa'
   },
   title2: {
     marginLeft: 20,

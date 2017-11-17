@@ -42,12 +42,12 @@ class ConfirmCode extends Component {
   render() {
     const { goBack } = this.props.navigation;
     console.log('====================================');
-    console.log(this.props.navigation.state.params.details.number);
+    console.log(this.props.navigation.state.params.details.phoneNumber);
     console.log('====================================');
     return (
       <Container style={{ backgroundColor: '#dcdcdc' }}>
         <Image style={styles.imageContainer} source={imageurl} />
-        <Header style={styles.title}>
+        <Header style={styles.header}>
           <Row>
             <Button transparent onPress={() => goBack()}>
               <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
@@ -70,7 +70,7 @@ class ConfirmCode extends Component {
               onChangeText={text => this.setState({ codeInput: text })}
             />
           </Item>
-          <Button rounded dark style={styles.groupButton} onPress={this.goToGroups}>
+          <Button rounded dark style={styles.groupButton} onPress={this.confirmCode}>
             <Text style={{ fontWeight: '400' }}> Confirm OTP </Text>
           </Button>
 
@@ -92,9 +92,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  title: {
+  header: {
     flexDirection: 'row',
-    backgroundColor: '#f8f8ff'
+    backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10,

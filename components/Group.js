@@ -44,6 +44,9 @@ class Group extends Component {
       active: !this.state.active
     });
   };
+  goToUsers = () => {
+    this.props.navigation.navigate('Users');
+  };
   render() {
     const { navigate } = this.props.navigation;
     const { state } = this.props.navigation;
@@ -99,7 +102,12 @@ class Group extends Component {
           <List
             dataArray={items}
             renderRow={item => (
-              <ListItem avatar style={{ padding: 5, backgroundColor: 'transparent' }}>
+              <ListItem
+                button
+                avatar
+                style={{ padding: 5, backgroundColor: 'transparent' }}
+                onPress={this.goToUsers}
+              >
                 <Thumbnail circular source={reactImage} />
                 <Body>
                   <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>{item} </Text>
@@ -144,7 +152,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#f8f8ff'
+    backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10

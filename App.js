@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Chat from './components/Chat';
 import Group from './components/Group';
 import ConfirmCode from './components/ConfirmCode';
+import Users from './components/Users';
 
 const RootNavigation = StackNavigator(
   {
@@ -29,6 +30,12 @@ const RootNavigation = StackNavigator(
       screen: ConfirmCode,
       navigationOptions: ({ navigation }) => ({
         header: null
+      })
+    },
+    Users: {
+      screen: Users,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Users Page'
       })
     }
   },
