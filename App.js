@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 import Home from './components/Home';
 import Chat from './components/Chat';
@@ -11,31 +12,36 @@ const RootNavigation = StackNavigator(
       screen: Home,
       navigationOptions: ({ navigation }) => ({
         //header: null
+        gesturesEnabled: false
       })
     },
     Group: {
       screen: Group,
       navigationOptions: ({ navigation }) => ({
         //title: `Welcome ${navigation.state.params.userDetails.number || 'Snow'}`,
-        header: null
+        header: null,
+        gesturesEnabled: false
       })
     },
     Chat: {
       screen: Chat,
       navigationOptions: ({ navigation }) => ({
-        title: `${navigation.state.params.grpName}`
+        title: `${navigation.state.params.grpName}`,
+        gesturesEnabled: false
       })
     },
     ConfirmCode: {
       screen: ConfirmCode,
       navigationOptions: ({ navigation }) => ({
+        gesturesEnabled: false,
         header: null
       })
     },
     Users: {
       screen: Users,
       navigationOptions: ({ navigation }) => ({
-        title: 'Users Page'
+        title: 'Users Page',
+        gesturesEnabled: false
       })
     }
   },

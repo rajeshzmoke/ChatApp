@@ -70,7 +70,7 @@ class ConfirmCode extends Component {
               onChangeText={text => this.setState({ codeInput: text })}
             />
           </Item>
-          <Button rounded dark style={styles.groupButton} onPress={this.confirmCode}>
+          <Button rounded dark style={styles.groupButton} onPress={this.goToGroups}>
             <Text style={{ fontWeight: '400' }}> Confirm OTP </Text>
           </Button>
 

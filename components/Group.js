@@ -23,7 +23,6 @@ import {
 } from 'native-base';
 import imageurl from '../components/images/ice.jpg';
 import reactImage from '../components/images/img1.jpg';
-import AnonymousFace from './images/face.jpg';
 
 const navigateAction = NavigationActions.navigate({
   routeName: 'Home',
@@ -69,33 +68,28 @@ class Group extends Component {
           </Row>
         </Header>
         <Content>
-          <Row>
-            <Left style={{ paddingLeft: 10 }}>
-              <Item style={{ width: 240, borderBottomColor: 'black' }}>
-                <Input
-                  style={{ justifyContent: 'center' }}
-                  placeholder="Enter Group name"
-                  onChangeText={text => this.setState({ grpName: text })}
-                />
-              </Item>
-            </Left>
-            {/* <Body /> */}
-            <Right>
-              <Button
-                small
-                rounded
-                dark
-                style={styles.groupButton}
-                onPress={() =>
-                  navigate('Chat', {
-                    grpName: this.state.grpName || 'A Grp has noName'
-                  })}
-              >
-                {/* <Image source={AnonymousFace} style={{ width: 100, height: 30 }} /> */}
-                <Text style={{ fontWeight: '500' }}> Add Group </Text>
-              </Button>
-            </Right>
-          </Row>
+          <View style={{ flexDirection: 'row' }}>
+            <Item style={{ flex: 1, borderBottomColor: 'black' }}>
+              <Input
+                style={{ justifyContent: 'center' }}
+                placeholder="Enter Group name"
+                onChangeText={text => this.setState({ grpName: text })}
+              />
+            </Item>
+
+            <Button
+              small
+              rounded
+              dark
+              style={styles.groupButton}
+              onPress={() =>
+                navigate('Chat', {
+                  grpName: this.state.grpName || 'A Grp has noName'
+                })}
+            >
+              <Text style={{ fontWeight: '500' }}> Add Group </Text>
+            </Button>
+          </View>
           <Text>{}</Text>
         </Content>
         <View style={{ flex: 5, alignContent: 'stretch' }}>
@@ -152,7 +146,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#87cefa'
+    backgroundColor: 'transparent'
   },
   groupButton: {
     margin: 10

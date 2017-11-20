@@ -126,7 +126,7 @@ class Home extends Component {
           </Form>
 
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
+            <Button rounded success style={styles.buttonText} onPress={this.goToConfirmCode}>
               <Text>Next</Text>
               <Icon name="arrow-forward" />
             </Button>

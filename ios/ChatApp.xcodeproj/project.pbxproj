@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,26 +35,26 @@
 		2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E941DF850E9000B6D8A /* libRCTText-tvOS.a */; };
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		2D1CEBD3482C40DC8820D812 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EE76E22FB1B481C92D198DF /* FontAwesome.ttf */; };
 		2DCD954D1E0B4F2C00145EB5 /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ChatAppTests.m */; };
+		2F5E5BEAABA8412484117DF6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB97D7E99D574F7BA90E2923 /* Zocial.ttf */; };
 		33B35FA31FB586A200FAFB25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33B35F781FB586A200FAFB25 /* GoogleService-Info.plist */; };
 		41FFF0ECC06B4E9389322C30 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23966FE266D741DD9D3C397E /* libRNFirebase.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		665EC1D101194921ABB93CE5 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 574C56C0E7B548268BB1B394 /* rubicon-icon-font.ttf */; };
+		6BC6A5EDEB2148A8A5D1F3B6 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D88521BB50F4DDDA8EEC1FA /* Octicons.ttf */; };
+		80CB0A18199643E1A202F62D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA4058524FB34C54A0E3FB4D /* Ionicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		887264122A3340A4B7708AF3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32AC865FE764E8CA76481DB /* MaterialIcons.ttf */; };
+		924071A5109B45D7AE8695CC /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0836E8CDABB14FB38E940B91 /* Roboto_medium.ttf */; };
+		9E57A3D234E74FA5B8B1078F /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 155B137FB14341B785C23993 /* Roboto.ttf */; };
 		A4688332657D5ED425DF072E /* libPods-ChatApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4513FA84752EC6699C08D8E /* libPods-ChatApp.a */; };
 		A7C1CE381D8E9177F99739EA /* libPods-ChatApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A8164CF11F5A9F1C860E42 /* libPods-ChatApp-tvOS.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		CAA9312D78A34AF5BE6366F3 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F105FE60464263BD16C605 /* Entypo.ttf */; };
-		FD02ED0BF9D344EBA9C28298 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79E32B1F73DA42C9B0A916ED /* EvilIcons.ttf */; };
-		2D1CEBD3482C40DC8820D812 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EE76E22FB1B481C92D198DF /* FontAwesome.ttf */; };
-		DD884EE17AF74CB7A2A96EEF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB3EC26956A459FAFB5D53B /* Foundation.ttf */; };
-		80CB0A18199643E1A202F62D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA4058524FB34C54A0E3FB4D /* Ionicons.ttf */; };
-		887264122A3340A4B7708AF3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F32AC865FE764E8CA76481DB /* MaterialIcons.ttf */; };
-		6BC6A5EDEB2148A8A5D1F3B6 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D88521BB50F4DDDA8EEC1FA /* Octicons.ttf */; };
-		924071A5109B45D7AE8695CC /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0836E8CDABB14FB38E940B91 /* Roboto_medium.ttf */; };
-		9E57A3D234E74FA5B8B1078F /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 155B137FB14341B785C23993 /* Roboto.ttf */; };
-		665EC1D101194921ABB93CE5 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 574C56C0E7B548268BB1B394 /* rubicon-icon-font.ttf */; };
 		BCAAB1B0AD12423399B974C9 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDBF704951C94794AA02AC7F /* SimpleLineIcons.ttf */; };
-		2F5E5BEAABA8412484117DF6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB97D7E99D574F7BA90E2923 /* Zocial.ttf */; };
+		CAA9312D78A34AF5BE6366F3 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F105FE60464263BD16C605 /* Entypo.ttf */; };
+		DD884EE17AF74CB7A2A96EEF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB3EC26956A459FAFB5D53B /* Foundation.ttf */; };
+		FD02ED0BF9D344EBA9C28298 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79E32B1F73DA42C9B0A916ED /* EvilIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
+		};
+		33F260771FC301C200D11461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		33F260791FC301C200D11461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -321,6 +336,7 @@
 		00E356EE1AD99517003FC87E /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
+		0836E8CDABB14FB38E940B91 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		0967062514A9151E0280FFA1 /* Pods-ChatApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp-tvOSTests/Pods-ChatApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -332,6 +348,9 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ChatApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ChatApp/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		155B137FB14341B785C23993 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		17F105FE60464263BD16C605 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		1FB3EC26956A459FAFB5D53B /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		23966FE266D741DD9D3C397E /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ChatApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ChatApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChatApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,30 +359,26 @@
 		528D11FF17DCE0B42E041390 /* libPods-ChatAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5317D2E9BA11435E984E803E /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		532AEFAA59195553B5E45C5F /* Pods-ChatApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp-tvOS/Pods-ChatApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		574C56C0E7B548268BB1B394 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		79E32B1F73DA42C9B0A916ED /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		7D88521BB50F4DDDA8EEC1FA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		898E347CE070C80EFF666238 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
+		9EE76E22FB1B481C92D198DF /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		AB07DC8334EA39A62365EA7D /* libPods-ChatApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB97D7E99D574F7BA90E2923 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B4513FA84752EC6699C08D8E /* libPods-ChatApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDBF704951C94794AA02AC7F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CDE2D144A71666D678C23919 /* Pods-ChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatAppTests/Pods-ChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		D5596B82B2A24BC99F8F5EF9 /* Pods-ChatAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatAppTests/Pods-ChatAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D5827A26813EEADA15BEC333 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E9741B9746494D8D70B4121E /* Pods-ChatApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp-tvOSTests/Pods-ChatApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		EA4058524FB34C54A0E3FB4D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		F2A8164CF11F5A9F1C860E42 /* libPods-ChatApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17F105FE60464263BD16C605 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		79E32B1F73DA42C9B0A916ED /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9EE76E22FB1B481C92D198DF /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1FB3EC26956A459FAFB5D53B /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EA4058524FB34C54A0E3FB4D /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F32AC865FE764E8CA76481DB /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7D88521BB50F4DDDA8EEC1FA /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0836E8CDABB14FB38E940B91 /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		155B137FB14341B785C23993 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		574C56C0E7B548268BB1B394 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BDBF704951C94794AA02AC7F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AB97D7E99D574F7BA90E2923 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F32AC865FE764E8CA76481DB /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,6 +549,8 @@
 				33B35F9D1FB586A200FAFB25 /* libthird-party.a */,
 				33B35F9F1FB586A200FAFB25 /* libdouble-conversion.a */,
 				33B35FA11FB586A200FAFB25 /* libdouble-conversion.a */,
+				33F260781FC301C200D11461 /* libprivatedata.a */,
+				33F2607A1FC301C200D11461 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -665,7 +682,7 @@
 			sourceTree = "<group>";
 		};
 		FB3A1A3FECB34D959A6E90B2 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				17F105FE60464263BD16C605 /* Entypo.ttf */,
 				79E32B1F73DA42C9B0A916ED /* EvilIcons.ttf */,
@@ -682,7 +699,6 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -986,6 +1002,20 @@
 			remoteRef = 33B35FA01FB586A200FAFB25 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		33F260781FC301C200D11461 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 33F260771FC301C200D11461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33F2607A1FC301C200D11461 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = 33F260791FC301C200D11461 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1164,7 +1194,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1172,13 +1202,13 @@
 			name = "Bundle React Native code and images";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
 		037BBCF660566E3F5EFAF3AB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1186,7 +1216,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
@@ -1336,7 +1366,7 @@
 		};
 		C39CE182AD395D5ABDB5410A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1344,7 +1374,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
