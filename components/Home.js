@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Platform, ActivityIndicator } from 'react-native';
+import { Image, StyleSheet, Platform } from 'react-native';
 import {
   Container,
   Header,
@@ -17,7 +17,6 @@ import {
 import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import * as chatActions from '../actions/chatActions';
 import { getFireBase } from '../components/FireHelper';
 import imageurl from '../components/images/ice.jpg';
 
@@ -121,6 +120,7 @@ class Home extends Component {
               <Label>Phone Number</Label>
               <Input
                 //autoFocus
+                keyboardType="numeric"
                 onChangeText={value => this.setState({ phoneNumber: value })}
                 value={this.state.phoneNumber}
               />
@@ -144,9 +144,9 @@ class Home extends Component {
         <Spinner
           visible={this.state.loading}
           textContent={'Logging in...'}
-          textStyle={{ color: '#000000' }}
+          textStyle={{ color: '#fff' }}
+          overlayColor="rgba(0, 0, 0, 0.6)"
         />
-        {/* <ActivityIndicator animating={this.state.loading} /> */}
       </Container>
     );
   }

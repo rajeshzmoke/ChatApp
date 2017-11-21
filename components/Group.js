@@ -67,7 +67,7 @@ class Group extends Component {
             </Body>
           </Row>
         </Header>
-        <Content>
+        <View>
           <View style={{ flexDirection: 'row' }}>
             <Item style={{ flex: 1, borderBottomColor: 'black' }}>
               <Input
@@ -90,8 +90,7 @@ class Group extends Component {
               <Text style={{ fontWeight: '500' }}> Add Group </Text>
             </Button>
           </View>
-          <Text>{}</Text>
-        </Content>
+        </View>
         <View style={{ flex: 5, alignContent: 'stretch' }}>
           <List
             dataArray={items}
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: 'transparent'
+    backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10

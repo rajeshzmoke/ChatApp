@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, TextInput, TouchableOpacity, Platform } from 'react-native';
 import { Container, Header, Content, Button, Text, Item, Icon, Input, Title } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Row, Col, Grid } from 'react-native-easy-grid';
@@ -28,16 +28,18 @@ class ConfirmCode extends Component {
       confirmResult
         .confirm(codeInput)
         .then(user => {
-          this.setState({ message: 'Code Confirmed!', loading: false });
+          this.setState({ message: 'Codeb  Confirmed!', loading: false });
           this.props.navigation.navigate('Group', {
-            userDetails: {
-              name: this.props.navigation.state.params.details.name
-            }
+            name: this.props.navigation.state.params.details.name
           });
+          console.log('in ccs');
         })
-        .catch(error =>
-          this.setState({ message: `Code Confirm Error: ${error.message}`, loading: false })
-        );
+        .catch(error => {
+          console.log(error);
+          console.log('ERrrrrror');
+
+          this.setState({ message: `Code Confirm Error: ${error.message}`, loading: false });
+        });
     }
   };
   goToGroups = () => {
@@ -71,7 +73,7 @@ class ConfirmCode extends Component {
         <View
           style={{
             flexDirection: 'column',
-            height: '100%',
+            height: '83%',
             width: '100%',
             flexWrap: 'wrap',
             alignItems: 'center',
@@ -79,7 +81,13 @@ class ConfirmCode extends Component {
           }}
         >
           <TextInput
-            style={{ borderBottomWidth: 1, padding: 4, width: '50%', textAlign: 'center' }}
+            keyboardType="number-pad"
+            style={{
+              borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+              padding: 4,
+              width: '40%',
+              textAlign: 'center'
+            }}
             placeholder="Enter OTP"
             onChangeText={text => this.setState({ codeInput: text })}
           />
@@ -90,7 +98,7 @@ class ConfirmCode extends Component {
               borderRadius: 20,
               marginTop: 5
             }}
-            onPress={this.goToGroups}
+            onPress={this.confirmCode}
           >
             <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
           </TouchableOpacity>
@@ -99,7 +107,8 @@ class ConfirmCode extends Component {
         <Spinner
           visible={this.state.loading}
           textContent={'Checking OTP...'}
-          textStyle={{ color: '#000000' }}
+          textStyle={{ color: '#fff' }}
+          overlayColor="rgba(0, 0, 0, 0.6)"
         />
       </Container>
     );
