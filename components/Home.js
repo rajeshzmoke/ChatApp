@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 import {
   Container,
   Header,
@@ -16,6 +16,7 @@ import {
 } from 'native-base';
 import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 import * as chatActions from '../actions/chatActions';
 import { getFireBase } from '../components/FireHelper';
 import imageurl from '../components/images/ice.jpg';
@@ -36,7 +37,8 @@ class Home extends Component {
       codeInput: '',
       phoneNumber: '+91',
       confirmResult: null,
-      name: ''
+      name: '',
+      loading: false
     };
   }
 
@@ -54,7 +56,8 @@ class Home extends Component {
           codeInput: '',
           phoneNumber: '+91',
           confirmResult: null,
-          name: ''
+          name: '',
+          loading: false
         });
       }
     });
@@ -68,14 +71,14 @@ class Home extends Component {
     console.log('in sign in');
     const { phoneNumber } = this.state;
     console.log(phoneNumber);
-    this.setState({ message: 'Sending code ...' });
+    this.setState({ message: 'Sending code ...', loading: true });
 
     firebase
       .auth()
       .signInWithPhoneNumber(phoneNumber)
       .then(confirmResult => {
         console.log('in 1');
-        this.setState({ confirmResult, message: 'Code has been sent!' });
+        this.setState({ confirmResult, message: 'Code has been sent!', loading: false });
         console.log(this.state.user);
 
         this.props.navigation.navigate('ConfirmCode', {
@@ -85,7 +88,10 @@ class Home extends Component {
         console.log('in 3');
       })
       .catch(error =>
-        this.setState({ message: `Sign In With Phone Number Error: ${error.message}` })
+        this.setState({
+          message: `Sign In With Phone Number Error: ${error.message}`,
+          loading: false
+        })
       );
   };
 
@@ -126,7 +132,7 @@ class Home extends Component {
           </Form>
 
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.goToConfirmCode}>
+            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
               <Text>Next</Text>
               <Icon name="arrow-forward" />
             </Button>
@@ -135,6 +141,12 @@ class Home extends Component {
             </Button>
           </Grid>
         </Content>
+        <Spinner
+          visible={this.state.loading}
+          textContent={'Logging in...'}
+          textStyle={{ color: '#000000' }}
+        />
+        {/* <ActivityIndicator animating={this.state.loading} /> */}
       </Container>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'native-base';
 
+const timer = null;
 class Timer extends Component {
   constructor() {
     super();
@@ -53,15 +54,21 @@ class Timer extends Component {
   render() {
     return (
       <View>
-        {/* <Button transparent dark onPress={this.startTimer}> */}
-        <Text>
-          Start s: {this.state.time.s}
-          {/* m: {this.state.time.m} */}
-        </Text>
-        {/* </Button> */}
+        <Button transparent dark onPress={this.startTimer}>
+          <Text>
+            Start s: {this.state.time.s}
+            {/* m: {this.state.time.m} */}
+          </Text>
+        </Button>
       </View>
     );
   }
 }
-
+// let smallTimer = null;
+// export default function getTimer() {
+//   if (smallTimer == null) {
+//     smallTimer = new Timer();
+//   }
+//   return smallTimer;
+// }
 export default Timer;

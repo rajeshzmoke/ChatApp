@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Container, Header, Content, Button, Text, Item, Icon, Input, Title } from 'native-base';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 import { Row, Col, Grid } from 'react-native-easy-grid';
 import imageurl from '../components/images/ice.jpg';
+import Timer from './Timer';
 
+const timer = new Timer();
 class ConfirmCode extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeInput: ''
+      codeInput: '',
+      timer: 0,
+      loading: false
     };
   }
 
   confirmCode = () => {
     console.log('in confirm code');
+    this.setState({ loading: true });
     const confirmResult = this.props.navigation.state.params.home;
     console.log(this.props.navigation.state.params.home);
     console.log('in confirm res');
@@ -23,17 +28,21 @@ class ConfirmCode extends Component {
       confirmResult
         .confirm(codeInput)
         .then(user => {
-          this.setState({ message: 'Code Confirmed!' });
+          this.setState({ message: 'Code Confirmed!', loading: false });
           this.props.navigation.navigate('Group', {
             userDetails: {
               name: this.props.navigation.state.params.details.name
             }
           });
         })
-        .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` }));
+        .catch(error =>
+          this.setState({ message: `Code Confirm Error: ${error.message}`, loading: false })
+        );
     }
   };
   goToGroups = () => {
+    // console.log('in gotogrps');
+    // timer.startTimer(timer);
     this.props.navigation.navigate('Group', {
       name: this.props.navigation.state.params.details.name
     });
@@ -54,28 +63,44 @@ class ConfirmCode extends Component {
             </Button>
 
             <Title style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
-              {`OTP sent for ${this.props.navigation.state.params.details.phoneNumber}`}
+              {`OTP sent to ${this.props.navigation.state.params.details.phoneNumber}`}
             </Title>
-
-            {/* <Right /> */}
           </Row>
         </Header>
-        <Content contentContainerStyle={{ marginVertical: 200 }}>
-          <Item
-            style={{ marginLeft: 'auto', marginRight: 'auto', width: 200, borderColor: 'black' }}
-          >
-            <Input
-              style={{ textAlign: 'center' }}
-              placeholder="Enter OTP"
-              onChangeText={text => this.setState({ codeInput: text })}
-            />
-          </Item>
-          <Button rounded dark style={styles.groupButton} onPress={this.goToGroups}>
-            <Text style={{ fontWeight: '400' }}> Confirm OTP </Text>
-          </Button>
 
-          <Text>{}</Text>
-        </Content>
+        <View
+          style={{
+            flexDirection: 'column',
+            height: '100%',
+            width: '100%',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <TextInput
+            style={{ borderBottomWidth: 1, padding: 4, width: '50%', textAlign: 'center' }}
+            placeholder="Enter OTP"
+            onChangeText={text => this.setState({ codeInput: text })}
+          />
+          <TouchableOpacity
+            style={{
+              padding: 10,
+              backgroundColor: '#333',
+              borderRadius: 20,
+              marginTop: 5
+            }}
+            onPress={this.goToGroups}
+          >
+            <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
+          </TouchableOpacity>
+          <Timer />
+        </View>
+        <Spinner
+          visible={this.state.loading}
+          textContent={'Checking OTP...'}
+          textStyle={{ color: '#000000' }}
+        />
       </Container>
     );
   }
