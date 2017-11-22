@@ -17,7 +17,14 @@ import {
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import { Row } from 'react-native-easy-grid';
-import Backend from './Backend';
+import getBackend from './Backend';
+
+const backend = getBackend();
+
+let gName = '';
+let uId = '';
+let userName = '';
+let ref = '';
 
 class Chat extends Component {
   static navigationOptions = {
@@ -34,7 +41,7 @@ class Chat extends Component {
   componentWillMount() {}
 
   componentDidMount() {
-    Backend.loadMessages(message => {
+    backend.loadMessages(message => {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }));
@@ -44,11 +51,17 @@ class Chat extends Component {
     });
   }
   componentWillUnmount() {
-    Backend.closeChat();
+    backend.closeChat();
   }
 
   render() {
     const { goBack } = this.props.navigation;
+
+    uId = this.props.navigation.state.params.groupData.userId;
+    userName = this.props.navigation.state.params.groupData.name;
+    gName = this.props.navigation.state.params.groupData.groupName;
+    ref = this.props.navigation.state.params.groupData.ref;
+
     return (
       <Container style={styles.chatContainer}>
         <Header>
@@ -58,7 +71,7 @@ class Chat extends Component {
             </Button>
             <Body>
               <Title style={{ marginRight: 'auto', color: 'black' }}>
-                {this.props.navigation.state.params.grpName} Chat
+                {this.props.navigation.state.params.groupData.groupName} Chat
               </Title>
             </Body>
             {/* <Right /> */}
@@ -67,12 +80,12 @@ class Chat extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={message => {
-            Backend.sendMessage(message);
+            backend.sendMessage(message, gName);
           }}
           isLoadingEarlier={this.state.isLoadingEarlier}
           user={{
-            _id: Backend.getUid(),
-            name: this.props.chat.name
+            id: uId,
+            name: userName
           }}
         />
       </Container>

@@ -86,24 +86,25 @@ class Home extends Component {
         });
         console.log('in 3');
       })
-      .catch(error =>
+      .catch(error => {
+        console.log(error);
         this.setState({
           message: `Sign In With Phone Number Error: ${error.message}`,
           loading: false
-        })
-      );
+        });
+      });
   };
 
   otpCode = () => {
     this.props.navigation.navigate('ConfirmCode', { details: this.state });
   };
 
-  goToConfirmCode = () => {
-    this.props.navigation.navigate('ConfirmCode', {
-      home: this.state.confirmResult,
-      details: this.state
-    });
-  };
+  // goToConfirmCode = () => {
+  //   this.props.navigation.navigate('ConfirmCode', {
+  //     home: this.state.confirmResult,
+  //     details: this.state
+  //   });
+  // };
 
   render() {
     return (

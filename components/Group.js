@@ -23,18 +23,34 @@ import {
 } from 'native-base';
 import imageurl from '../components/images/ice.jpg';
 import reactImage from '../components/images/img1.jpg';
+import getBackend from './Backend';
+
+const backend = getBackend();
 
 const navigateAction = NavigationActions.navigate({
   routeName: 'Home',
   action: NavigationActions.navigate({ routeName: 'Group' })
 });
 const firebase = getFireBase();
+
 class Group extends Component {
   state = {
     grpName: '',
     groups: [],
-    active: 'false'
+    active: 'false',
+    items: [
+      'Mobile Development',
+      'React Native Developers',
+      'ios Developers',
+      'Android Developers',
+      'React Web developers'
+    ]
   };
+
+  componentWillMount() {
+    const userId = this.props.navigation.state.params.userDetails.userId;
+    backend.getGroups(userId);
+  }
 
   signOut = () => {
     firebase.auth().signOut();
@@ -46,24 +62,33 @@ class Group extends Component {
   goToUsers = () => {
     this.props.navigation.navigate('Users');
   };
+
+  addGroup = () => {
+    const userDetails = this.props.navigation.state.params.userDetails;
+    backend.addGroup({
+      ...userDetails,
+      groupName: this.state.grpName
+    });
+    this.props.navigation.navigate('Chat', {
+      groupData: {
+        ...userDetails,
+        groupName: this.state.grpName
+      }
+    });
+  };
+
   render() {
     const { navigate } = this.props.navigation;
     const { state } = this.props.navigation;
     //const { goBack } = this.props.navigation;
-    const items = [
-      'Mobile Development',
-      'React Native Developers',
-      'ios Developers',
-      'Android Developers',
-      'React Web developers'
-    ];
+
     return (
       <Container>
         <Image style={styles.imageContainer} source={imageurl} />
         <Header style={styles.header}>
           <Row>
             <Body>
-              <Title style={{ color: 'black' }}>Welcome {state.params.name}</Title>
+              <Title style={{ color: 'black' }}>Welcome {state.params.userDetails.name}</Title>
             </Body>
           </Row>
         </Header>
@@ -77,23 +102,14 @@ class Group extends Component {
               />
             </Item>
 
-            <Button
-              small
-              rounded
-              dark
-              style={styles.groupButton}
-              onPress={() =>
-                navigate('Chat', {
-                  grpName: this.state.grpName || 'A Grp has noName'
-                })}
-            >
+            <Button small rounded dark style={styles.groupButton} onPress={this.addGroup}>
               <Text style={{ fontWeight: '500' }}> Add Group </Text>
             </Button>
           </View>
         </View>
         <View style={{ flex: 5, alignContent: 'stretch' }}>
           <List
-            dataArray={items}
+            dataArray={this.state.items}
             renderRow={item => (
               <ListItem
                 button

@@ -5,6 +5,9 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { Row, Col, Grid } from 'react-native-easy-grid';
 import imageurl from '../components/images/ice.jpg';
 import Timer from './Timer';
+import getBackend from './Backend';
+
+const backend = getBackend();
 
 const timer = new Timer();
 class ConfirmCode extends Component {
@@ -29,8 +32,18 @@ class ConfirmCode extends Component {
         .confirm(codeInput)
         .then(user => {
           this.setState({ message: 'Codeb  Confirmed!', loading: false });
+          backend.addUsers({
+            number: this.props.navigation.state.params.number,
+            name: this.props.navigation.state.params.name,
+            userId: user.uid
+          });
+
           this.props.navigation.navigate('Group', {
-            name: this.props.navigation.state.params.details.name
+            userDetails: {
+              number: this.props.navigation.state.params.details.number,
+              name: this.props.navigation.state.params.details.name,
+              userId: user.uid
+            }
           });
           console.log('in ccs');
         })
