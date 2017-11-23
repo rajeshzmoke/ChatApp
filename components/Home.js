@@ -1,57 +1,149 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform } from 'react-native';
+import {
+  Container,
+  Header,
+  Body,
+  Content,
+  Button,
+  Text,
+  Icon,
+  Form,
+  Item,
+  Input,
+  Title,
+  Label
+} from 'native-base';
+
+import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import * as chatActions from '../actions/chatActions';
+import { getInstance } from '../components/FireBaseHelper';
+import imageurl from '../components/images/ice.jpg';
+
+const firebase = getInstance();
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.nextPressed = this.nextPressed.bind(this);
-  }
-  nextPressed() {
-    //debugger;
-    const { navigate } = this.props.navigation;
-    const userDetails = {
-      number: this.refs.numberField._lastNativeText, //get the value from the textinput
-      name: this.refs.nameField._lastNativeText
+  static navigationOptions = {
+    header: null
+  };
+
+  constructor(props) {
+    super(props);
+    this.unsubscribe = null;
+    this.state = {
+      user: null,
+      message: '',
+      codeInput: '',
+      phoneNumber: '+91',
+      confirmResult: null,
+      name: ''
     };
-    console.log(userDetails.name);
-    this.props.dispatch(chatActions.setName(userDetails));
-    navigate('Group', {
-      //name: this.refs.nameField._lastNativeText,
-      userDetails
+  }
+
+  componentDidMount() {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('====================================');
+        console.log('auto check');
+        console.log('====================================');
+      } else {
+        // User has been signed out, reset the state
+        this.setState({
+          user: null,
+          message: '',
+          codeInput: '',
+          phoneNumber: '',
+          confirmResult: null,
+          name: ''
+        });
+      }
     });
   }
 
+  componentWillUnmount() {
+    if (this.unsubscribe) this.unsubscribe();
+  }
+
+  signIn = () => {
+    const { phoneNumber } = this.state;
+    this.setState({ message: 'Sending code ...' });
+    firebase
+      .auth()
+      .signInWithPhoneNumber(phoneNumber)
+      .then(confirmResult => {
+        this.setState({ confirmResult, message: 'Code has been sent!' });
+        this.props.navigation.navigate('ConfirmCode', { home: this.state.confirmResult,
+        number: this.state.phoneNumber,
+        name: this.state.name
+      });
+      })
+      .catch(error =>  
+        this.setState({ message: `Sign In With Phone Number Error: ${error.message}` })
+      );
+  };
+
+  // goToConfirmCode = () => {
+  //   this.props.navigation.navigate('ConfirmCode', {
+  //     home: this.state.confirmResult,
+  //     details: this.state
+  //   });
+  // };
+
   render() {
     return (
-      <View>
-        <Text style={styles.title}>Enter Your Number :</Text>
-        <TextInput ref="numberField" style={styles.nameInput} placeholder="+91" />
+      <Container style={styles.container}>
+        <Image style={styles.imageContainer} source={imageurl} />
+        <Header style={styles.header}>
+          <Body>
+            <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
+          </Body>
+        </Header>
+        <Content style={{ height: '100%' }}>
+          <Form>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Phone Number</Label>
+              <Input
+                autoFocus
+                onChangeText={value => this.setState({ phoneNumber: value })}
+                value={this.state.phoneNumber}
+              />
+            </Item>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Enter Name</Label>
+              <Input onChangeText={text => this.setState({ name: text })} />
+            </Item>
+          </Form>
 
-        <Text style={styles.title2}>Enter Your Name :</Text>
-        <TextInput ref="nameField" style={styles.nameInput} placeholder="John Snow" />
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.buttonText} onPress={this.nextPressed}>
-            <Text>Next</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonText}>
-            <Text> Signup</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+          <Grid>
+            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
+              <Icon name="arrow-forward" />
+              <Text>Next</Text>
+            </Button>
+            <Button rounded danger style={styles.buttonText} onPress={this.otpCode}>
+              <Text> Signup</Text>
+            </Button>
+          </Grid>
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    backgroundColor: '#dcdcdc'
   },
-  title: {
-    marginTop: 20,
-    marginLeft: 20,
-    fontSize: 18
+  imageContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%'
+  },
+  header: {
+    backgroundColor: '#f8f8ff'
   },
   title2: {
     marginLeft: 20,
@@ -67,9 +159,7 @@ const styles = StyleSheet.create({
   buttonText: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    margin: 10,
-    borderWidth: 2,
-    backgroundColor: '#a9a9a9'
+    margin: 10
   }
 });
 

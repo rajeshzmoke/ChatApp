@@ -1,38 +1,43 @@
-import * as firebase from 'firebase';
-//import firebase from 'react-native-firebase';
+
+import { getInstance } from './FireBaseHelper';
+
+const firebase = getInstance();
+
+let backendInstance = null;
 
 class Backend {
+
   uid = '';
   messagesRef = null;
-  constructor() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyAvKPtsqqqGjkGLkXD8BeqOR6GwJaI2AcE',
-      authDomain: 'chatapp-7c693.firebaseapp.com',
-      databaseURL: 'https://chatapp-7c693.firebaseio.com',
-      storageBucket: 'chatapp-7c693.appspot.com'
-    });
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setUid(user.uid);
-      } else {
-        firebase
-          .auth()
-          .signInAnonymously()
-          .catch(error => {
-            alert(error.message);
-          });
-      }
-    });
+  key = null;
+
+  addGroup = (groupInfo, callBack) => {
+    const groupRef = firebase.database().ref().child('Groups').push();
+    const groupKey = groupRef.key;
+    groupRef.set({
+      groupName: groupInfo.groupName,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+      createdBy: groupInfo.userId
+     }, () => { 
+       this.addUsersToGroup({
+                   ...groupInfo,
+                      groupKey 
+         });
+        callBack(groupKey);
+      });  
   }
-  setUid(value) {
-    this.uid = value;
+
+  addUsersToGroup = (groupInfo) => { 
+    firebase.database().ref().child('Users').child(groupInfo.userId)
+    .child('groups')
+    .child(groupInfo.groupKey)
+    .set(groupInfo.groupName);
   }
-  getUid() {
-    return this.uid;
-  }
+
   //retrieve messages from the backend
-  loadMessages(callback) {
-    this.messagesRef = firebase.database().ref('messages');
+  loadMessages(callback, key) {
+
+    this.messagesRef = firebase.database().ref('Messages').child(key);
     this.messagesRef.off();
     const onReceive = data => {
       const message = data.val();
@@ -41,28 +46,64 @@ class Backend {
         text: message.text,
         createdAt: new Date(message.createdAt),
         user: {
-          _id: message.user._id,
+          _id: message.user.id,
           name: message.user.name
         }
       });
     };
     this.messagesRef.limitToLast(20).on('child_added', onReceive);
   }
+
+
   //send the message to the BAckend
-  sendMessage(message) {
+  sendMessage = (message, groupInfo) => {
     for (let i = 0; i < message.length; i++) {
-      this.messagesRef.push({
+      firebase.database().ref().child('Messages').child(groupInfo.groupKey)
+      .push({
+        groupName: groupInfo.gName,
         text: message[i].text,
         user: message[i].user,
         createdAt: firebase.database.ServerValue.TIMESTAMP
       });
     }
   }
+
+  addUsers = (user) => {
+     firebase.database().ref().child('Users').child(user.userId)
+      .once('value', (snapshot) => {
+        const exists = (snapshot.val() !== null);
+        if (!exists) {
+          firebase.database().ref().child('Users').child(user.userId)
+          .set({
+            name: user.name,
+            number: user.number,
+            createdAt: firebase.database.ServerValue.TIMESTAMP
+            });
+        }
+    });
+  }
+
+  getGroups = (userID) => {
+    const data = firebase.database().ref('Users').child(userID).child('groups');
+      //data.off(); todo why
+   return data.once('value')
+    .then((snapshot) => snapshot.val()
+    );
+  }
+
+
   //close the connection to the backend
-  closeChat() {
+
+  closeChat = () => {
     if (this.messagesRef) {
       this.messagesRef.off();
     }
   }
 }
-export default new Backend();
+
+export default function getBackend() {
+  if (backendInstance == null) {
+    backendInstance = new Backend();
+  }
+  return backendInstance;
+}
