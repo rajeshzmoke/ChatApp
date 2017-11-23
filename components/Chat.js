@@ -69,7 +69,13 @@ class Chat extends Component {
       <Container style={styles.chatContainer}>
         <Header style={styles.header}>
           <Left style={{ flex: 1 }}>
-            <Button transparent onPress={() => goBack()}>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.state.params.onNavigateBack();
+                goBack();
+              }}
+            >
               <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
             </Button>
           </Left>

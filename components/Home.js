@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Image, StyleSheet, Platform } from 'react-native';
 import {
   Container,
   Header,
@@ -18,7 +18,7 @@ import { Grid } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getFireBase } from '../components/FireHelper';
-import imageurl from '../components/images/ice.jpg';
+import imageurl from '../components/images/ocean.jpg';
 
 const firebase = getFireBase();
 
@@ -132,15 +132,15 @@ class Home extends Component {
             </Item>
           </Form>
 
-          <Grid>
+          <View style={{ marginTop: 10 }}>
             <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
               <Text>Next</Text>
-              <Icon name="arrow-forward" />
+              <Icon name="glasses" />
             </Button>
             <Button transparent rounded dark style={styles.buttonText} onPress={this.otpCode}>
               <Text> Signup</Text>
             </Button>
-          </Grid>
+          </View>
         </Content>
         <Spinner
           visible={this.state.loading}
@@ -155,7 +155,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#dcdcdc'
+    backgroundColor: '#b0c4de'
   },
   imageContainer: {
     position: 'absolute',

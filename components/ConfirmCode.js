@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, TextInput, TouchableOpacity, Platform } from '
 import { Container, Header, Content, Button, Text, Item, Icon, Input, Title } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Row, Col, Grid } from 'react-native-easy-grid';
-import imageurl from '../components/images/ice.jpg';
+import imageurl from '../components/images/ocean.jpg';
 import Timer from './Timer';
 import getBackend from './Backend';
 

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Modal, View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { getFireBase } from '../components/FireHelper';
-import { Row } from 'react-native-easy-grid';
+import { Row, Col, Grid } from 'react-native-easy-grid';
 import {
   Container,
   Header,
   Body,
+  Footer,
   Button,
   Text,
   Item,
@@ -18,7 +19,7 @@ import {
   List,
   ListItem
 } from 'native-base';
-import imageurl from '../components/images/ice.jpg';
+import imageurl from '../components/images/ocean.jpg';
 import reactImage from '../components/images/img1.jpg';
 import getBackend from './Backend';
 import PopupDialog, {
@@ -61,7 +62,9 @@ class Group extends Component {
     const userId = this.props.navigation.state.params.userDetails.userId;
     backend.getGroups(userId);
   }
-
+  yedhavadu = () => {
+    console.log('asdjkalsdj;aklsdal;ksd');
+  };
   signOut = () => {
     firebase.auth().signOut();
     this.props.navigation.dispatch(navigateAction);
@@ -90,7 +93,8 @@ class Group extends Component {
         groupData: {
           ...userDetails,
           groupName: this.state.grpName
-        }
+        },
+        onNavigateBack: this.yedhavadu
       },
       this.setState({ showDialog: false })
     );
@@ -152,16 +156,15 @@ class Group extends Component {
             )}
           />
           <Dialog
-            style={{ backgroundColor: 'red' }}
             visible={this.state.showDialog}
-            title="Add Group"
+            //title="Add Group"
             onTouchOutside={() => this.setState({ showDialog: false })}
           >
             <View style={{ flexDirection: 'column', flexWrap: 'wrap', alignItems: 'center' }}>
               <TextInput
                 placeholder="Enter Group Name"
                 style={{
-                  margin: 5,
+                  marginTop: 10,
                   width: '60%',
                   borderBottomWidth: 2,
                   borderBottomColor: 'black',
@@ -169,10 +172,26 @@ class Group extends Component {
                 }}
                 onChangeText={text => this.setState({ grpName: text })}
               />
-              {/* <Button rounded dark style={styles.groupButton} onPress={this.addGroup}>
-                <Text style={{ fontWeight: '500' }}> Add Group </Text>
-              </Button> */}
-              <TouchableOpacity
+
+              <Body>
+                <Button
+                  small
+                  rounded
+                  dark
+                  style={{
+                    //padding: 10,
+                    width: '50%',
+                    backgroundColor: '#222',
+                    borderRadius: 20,
+                    marginTop: 5
+                  }}
+                  onPress={this.addGroup}
+                >
+                  <Text style={{ fontWeight: '500' }}> Add Group </Text>
+                </Button>
+              </Body>
+              <Footer style={{ height: '5%' }} />
+              {/* <TouchableOpacity
                 style={{
                   padding: 10,
                   width: '50%',
@@ -183,7 +202,7 @@ class Group extends Component {
                 onPress={this.addGroup}
               >
                 <Title style={{ color: 'white' }}>Create Group</Title>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </Dialog>
         </View>
