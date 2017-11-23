@@ -45,7 +45,6 @@ class ConfirmCode extends Component {
               userId: user.uid
             }
           });
-          console.log('in ccs');
         })
         .catch(error => {
           console.log(error);
@@ -56,10 +55,12 @@ class ConfirmCode extends Component {
     }
   };
   goToGroups = () => {
-    // console.log('in gotogrps');
-    // timer.startTimer(timer);
     this.props.navigation.navigate('Group', {
-      name: this.props.navigation.state.params.details.name
+      userDetails: {
+        number: this.props.navigation.state.params.details.number,
+        name: this.props.navigation.state.params.details.name,
+        userId: 1 //user.uid
+      }
     });
   };
 
@@ -111,7 +112,7 @@ class ConfirmCode extends Component {
               borderRadius: 20,
               marginTop: 5
             }}
-            onPress={this.confirmCode}
+            onPress={this.goToGroups}
           >
             <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
           </TouchableOpacity>

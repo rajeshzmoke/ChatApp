@@ -11,6 +11,7 @@ import {
   Input,
   Title,
   Left,
+  Right,
   Icon,
   Fab
 } from 'native-base';
@@ -53,7 +54,9 @@ class Chat extends Component {
   componentWillUnmount() {
     backend.closeChat();
   }
-
+  grpInfo = () => {
+    this.props.navigation.navigate('Modalview');
+  };
   render() {
     const { goBack } = this.props.navigation;
 
@@ -64,18 +67,20 @@ class Chat extends Component {
 
     return (
       <Container style={styles.chatContainer}>
-        <Header>
-          <Row>
+        <Header style={styles.header}>
+          <Left style={{ flex: 1 }}>
             <Button transparent onPress={() => goBack()}>
               <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
             </Button>
-            <Body>
+          </Left>
+          <Body style={{ flex: 1 }}>
+            <Button transparent onPress={this.grpInfo}>
               <Title style={{ marginRight: 'auto', color: 'black' }}>
                 {this.props.navigation.state.params.groupData.groupName} Chat
               </Title>
-            </Body>
-            {/* <Right /> */}
-          </Row>
+            </Button>
+          </Body>
+          <Right style={{ flex: 1 }} />
         </Header>
         <GiftedChat
           messages={this.state.messages}
@@ -95,6 +100,9 @@ class Chat extends Component {
 const styles = StyleSheet.create({
   chatContainer: {
     backgroundColor: '#B8DBEE'
+  },
+  header: {
+    backgroundColor: '#87cefa'
   }
 });
 export default connect(state => ({ chat: state.chatReducer.chat }))(Chat);

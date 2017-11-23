@@ -16,6 +16,8 @@
     "react-native-firebase": "^3.1.0",
     "react-native-gifted-chat": "^0.3.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-popup-dialog": "^0.9.39",
+    "react-native-simple-dialogs": "^0.3.1",
     "react-navigation": "^1.0.0-beta.15",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",

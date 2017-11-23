@@ -5,6 +5,7 @@ import Chat from './components/Chat';
 import Group from './components/Group';
 import ConfirmCode from './components/ConfirmCode';
 import Users from './components/Users';
+import Modalview from './components/Modalview';
 
 const RootNavigation = StackNavigator(
   {
@@ -27,6 +28,7 @@ const RootNavigation = StackNavigator(
       screen: Chat,
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.state.params.grpName}`,
+        header: null,
         gesturesEnabled: false
       })
     },
@@ -35,6 +37,12 @@ const RootNavigation = StackNavigator(
       navigationOptions: ({ navigation }) => ({
         gesturesEnabled: false,
         header: null
+      })
+    },
+    Modalview: {
+      screen: Modalview,
+      navigationOptions: ({ navigation }) => ({
+        gesturesEnabled: false
       })
     },
     Users: {
