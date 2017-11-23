@@ -133,11 +133,11 @@ class Home extends Component {
           </Form>
 
           <Grid>
-            <Button rounded success style={styles.buttonText} onPress={this.signIn}>
+            <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
               <Text>Next</Text>
               <Icon name="arrow-forward" />
             </Button>
-            <Button rounded danger style={styles.buttonText} onPress={this.otpCode}>
+            <Button transparent rounded dark style={styles.buttonText} onPress={this.otpCode}>
               <Text> Signup</Text>
             </Button>
           </Grid>
