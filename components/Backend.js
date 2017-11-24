@@ -4,37 +4,48 @@ const firebase = getFireBase();
 let backendInstance = null;
 
 class Backend {
-  uid = '';
   messagesRef = null;
-  key = null;
 
-  addGroup = groupInfo => {
-    const grpRef = firebase
+  createGroup = (groupInfo, callBack) => {
+    const groupRef = firebase
       .database()
       .ref()
       .child('Groups')
-      .push({
+      .push();
+    const groupKey = groupRef.key;
+    groupRef.set(
+      {
         groupName: groupInfo.groupName,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         createdBy: groupInfo.userId
-      });
-    this.key = grpRef.key;
+      },
+      () => {
+        this.addGroupToUser({
+          ...groupInfo,
+          groupKey
+        });
+        callBack(groupKey);
+      }
+    );
+  };
+
+  addGroupToUser = groupInfo => {
     firebase
       .database()
       .ref()
       .child('Users')
       .child(groupInfo.userId)
       .child('groups')
-      .child(this.key)
+      .child(groupInfo.groupKey)
       .set(groupInfo.groupName);
   };
 
   //retrieve messages from the backend
-  loadMessages(callback) {
+  loadMessages(callback, key) {
     this.messagesRef = firebase
       .database()
       .ref('Messages')
-      .child(this.key);
+      .child(key);
     this.messagesRef.off();
     const onReceive = data => {
       const message = data.val();
@@ -43,8 +54,8 @@ class Backend {
         text: message.text,
         createdAt: new Date(message.createdAt),
         user: {
-          _id: 'wKFVFspfGJOHSqUl7rD1Hcty3OM2',
-          name: 'Swap'
+          _id: message.user.id,
+          name: message.user.name
         }
       });
     };
@@ -52,18 +63,15 @@ class Backend {
   }
 
   //send the message to the BAckend
-  sendMessage = (message, gName) => {
-    console.log(message);
-    console.log('====================================');
-    console.log(gName);
+  sendMessage = (message, groupInfo) => {
     for (let i = 0; i < message.length; i++) {
       firebase
         .database()
         .ref()
         .child('Messages')
-        .child(this.key)
+        .child(groupInfo.groupKey)
         .push({
-          groupName: gName,
+          groupName: groupInfo.gName,
           text: message[i].text,
           user: message[i].user,
           createdAt: firebase.database.ServerValue.TIMESTAMP
@@ -72,49 +80,85 @@ class Backend {
   };
 
   addUsers = user => {
-    console.log('===========in add Users===========');
-    console.log(user);
-    console.log('============in add Users==============');
+    const firebaseRef = firebase.database().ref();
 
-    firebase
-      .database()
-      .ref()
+    firebaseRef
       .child('Users')
       .child(user.userId)
       .once('value', snapshot => {
         const exists = snapshot.val() !== null;
         if (!exists) {
-          firebase
-            .database()
-            .ref()
+          firebaseRef
             .child('Users')
             .child(user.userId)
             .set({
               name: user.name,
-              number: user.number,
+              phoneNumber: user.phoneNumber,
               createdAt: firebase.database.ServerValue.TIMESTAMP
             });
+
+          const inviteRef = firebaseRef.child('Invite').child(user.phoneNumber);
+
+          inviteRef.once('value').then(data => {
+            if (data.val()) {
+              console.log(data.val());
+              // this.addGroupToUser({
+              //   groupName: groupInfo.groupName,
+              //   groupKey: groupInfo.groupKey,
+              //   userId: user.userId
+              // });
+            }
+          });
         }
       });
   };
 
+  checkForUsersInGroup = groupInfo => {
+    console.log('in checkForUsersInGroup');
+    console.log(groupInfo.phoneNumber);
+    firebase
+      .database()
+      .ref()
+      .child('Users')
+      .orderByChild('phoneNumber')
+      .equalTo(groupInfo.phoneNumber)
+      .once('value', snapshot => {
+        console.log('==================checkForUsersInGroup==================');
+        console.log(snapshot);
+        if (snapshot.val()) {
+          console.log('if');
+          const userId = String(Object.keys(snapshot.val()));
+          this.addGroupToUser({
+            groupName: groupInfo.groupName,
+            groupKey: groupInfo.groupKey,
+            userId
+          });
+        } else {
+          console.log('else');
+          this.addUserToInvite(groupInfo);
+        }
+        console.log('=================checkForUsersInGroup===================');
+      });
+  };
+
   getGroups = userID => {
-    console.log(userID);
     const data = firebase
       .database()
       .ref('Users')
       .child(userID)
       .child('groups');
-    data.off();
-    console.log(data);
-    data.once('value').then(snapshot => {
-      console.log('=============snapshot==================');
-      console.log(snapshot);
-      const val = snapshot.val();
-      console.log('=============getGroups==================');
-      console.log(val);
-      console.log('============getGroups=================');
-    });
+    //data.off(); todo why
+    return data.once('value').then(snapshot => snapshot.val());
+  };
+
+  addUserToInvite = groupInfo => {
+    firebase
+      .database()
+      .ref()
+      .child('Invite')
+      .child(groupInfo.phoneNumber)
+      .child(groupInfo.groupKey)
+      .set(groupInfo.groupName);
   };
 
   //close the connection to the backend

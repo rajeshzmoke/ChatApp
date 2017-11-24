@@ -22,10 +22,10 @@ import getBackend from './Backend';
 
 const backend = getBackend();
 
-let gName = '';
-let uId = '';
-let userName = '';
-let ref = '';
+const gName = '';
+const uId = '';
+const userName = '';
+const ref = '';
 
 class Chat extends Component {
   static navigationOptions = {
@@ -46,7 +46,7 @@ class Chat extends Component {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }));
-    });
+    }, this.props.navigation.state.params.groupData.groupKey);
     this.setState({
       isLoadingEarlier: true
     });
@@ -55,15 +55,18 @@ class Chat extends Component {
     backend.closeChat();
   }
   grpInfo = () => {
-    this.props.navigation.navigate('Modalview');
+    this.props.navigation.navigate('Users', {
+      groupName: this.props.navigation.state.params.groupData.groupName,
+      groupKey: this.props.navigation.state.params.groupData.groupKey
+    });
   };
   render() {
     const { goBack } = this.props.navigation;
 
-    uId = this.props.navigation.state.params.groupData.userId;
-    userName = this.props.navigation.state.params.groupData.name;
-    gName = this.props.navigation.state.params.groupData.groupName;
-    ref = this.props.navigation.state.params.groupData.ref;
+    // uId = this.props.navigation.state.params.groupData.userId;
+    // userName = this.props.navigation.state.params.groupData.name;
+    // gName = this.props.navigation.state.params.groupData.groupName;
+    // ref = this.props.navigation.state.params.groupData.ref;
 
     return (
       <Container style={styles.chatContainer}>
@@ -91,12 +94,15 @@ class Chat extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={message => {
-            backend.sendMessage(message, gName);
+            backend.sendMessage(message, {
+              groupName: this.props.navigation.state.params.groupData.groupName,
+              groupKey: this.props.navigation.state.params.groupData.groupKey
+            });
           }}
           isLoadingEarlier={this.state.isLoadingEarlier}
           user={{
-            id: uId,
-            name: userName
+            id: this.props.navigation.state.params.groupData.userId,
+            name: this.props.navigation.state.params.groupData.name
           }}
         />
       </Container>

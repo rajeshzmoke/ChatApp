@@ -76,15 +76,11 @@ class Home extends Component {
       .auth()
       .signInWithPhoneNumber(phoneNumber)
       .then(confirmResult => {
-        console.log('in 1');
         this.setState({ confirmResult, message: 'Code has been sent!', loading: false });
-        console.log(this.state.user);
-
         this.props.navigation.navigate('ConfirmCode', {
           home: this.state.confirmResult,
           details: this.state
         });
-        console.log('in 3');
       })
       .catch(error => {
         console.log(error);
@@ -98,7 +94,6 @@ class Home extends Component {
   otpCode = () => {
     this.props.navigation.navigate('ConfirmCode', { details: this.state });
   };
-
   // goToConfirmCode = () => {
   //   this.props.navigation.navigate('ConfirmCode', {
   //     home: this.state.confirmResult,
@@ -137,9 +132,9 @@ class Home extends Component {
               <Text>Next</Text>
               <Icon name="glasses" />
             </Button>
-            <Button transparent rounded dark style={styles.buttonText} onPress={this.otpCode}>
+            {/* <Button transparent rounded dark style={styles.buttonText} onPress={this.otpCode}>
               <Text> Signup</Text>
-            </Button>
+            </Button> */}
           </View>
         </Content>
         <Spinner

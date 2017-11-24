@@ -48,23 +48,14 @@ class Group extends Component {
     grpName: '',
     groups: [],
     active: 'false',
-    items: [
-      'Mobile Development',
-      'React Native Developers',
-      'ios Developers',
-      'Android Developers',
-      'React Web developers'
-    ],
+    items: [],
     modalVisible: false
   };
 
   componentWillMount() {
-    const userId = this.props.navigation.state.params.userDetails.userId;
-    backend.getGroups(userId);
+    this.updateGroups();
   }
-  yedhavadu = () => {
-    console.log('asdjkalsdj;aklsdal;ksd');
-  };
+
   signOut = () => {
     firebase.auth().signOut();
     this.props.navigation.dispatch(navigateAction);
@@ -72,32 +63,62 @@ class Group extends Component {
       active: !this.state.active
     });
   };
-  goToUsers = () => {
-    console.log('usersadasdasd');
-    this.props.navigation.navigate('Users');
+
+  goToChat = groupKey => {
+    const userDetails = this.props.navigation.state.params.userDetails;
+    this.props.navigation.navigate('Chat', {
+      groupData: {
+        ...userDetails,
+        groupName: this.state.items[groupKey],
+        groupKey
+      },
+      onNavigateBack: this.updateGroups
+    });
   };
+
   goToModal = () => {
     console.log('usersadasdasd');
     this.props.navigation.navigate('Modalview');
   };
 
-  addGroup = () => {
+  createGroup = () => {
     const userDetails = this.props.navigation.state.params.userDetails;
-    backend.addGroup({
-      ...userDetails,
-      groupName: this.state.grpName
-    });
+    backend.createGroup(
+      {
+        ...userDetails,
+        groupName: this.state.grpName
+      },
+      this.getGroupKey
+    );
+  };
+
+  getGroupKey = groupKey => {
+    const userDetails = this.props.navigation.state.params.userDetails;
     this.props.navigation.navigate(
       'Chat',
       {
         groupData: {
           ...userDetails,
-          groupName: this.state.grpName
+          groupName: this.state.grpName,
+          groupKey
         },
-        onNavigateBack: this.yedhavadu
+        onNavigateBack: this.updateGroups
       },
       this.setState({ showDialog: false })
     );
+  };
+
+  updateGroups = () => {
+    console.log('in update groups');
+    const userId = this.props.navigation.state.params.userDetails.userId;
+    backend.getGroups(userId).then(snapshot => {
+      console.log('================snapshot====================');
+      console.log(snapshot);
+      console.log('================snapshot====================');
+      this.setState({
+        items: snapshot
+      });
+    });
   };
 
   showModalView = () => {
@@ -140,17 +161,21 @@ class Group extends Component {
         </View>
         <View style={{ flex: 5, alignContent: 'stretch' }}>
           <List
-            dataArray={this.state.items}
+            dataArray={this.state.items ? Object.keys(this.state.items) : []}
             renderRow={item => (
               <ListItem
                 button
                 avatar
                 style={{ padding: 5, backgroundColor: 'transparent' }}
-                onPress={this.addGroup}
+                onPress={() => {
+                  this.goToChat(item);
+                }}
               >
                 <Thumbnail circular source={reactImage} />
                 <Body>
-                  <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>{item} </Text>
+                  <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>
+                    {this.state.items[item]}
+                  </Text>
                 </Body>
               </ListItem>
             )}
@@ -185,7 +210,7 @@ class Group extends Component {
                     borderRadius: 20,
                     marginTop: 5
                   }}
-                  onPress={this.addGroup}
+                  onPress={this.createGroup}
                 >
                   <Text style={{ fontWeight: '500' }}> Add Group </Text>
                 </Button>

@@ -21,20 +21,19 @@ class ConfirmCode extends Component {
   }
 
   confirmCode = () => {
-    console.log('in confirm code');
     this.setState({ loading: true });
     const confirmResult = this.props.navigation.state.params.home;
-    console.log(this.props.navigation.state.params.home);
-    console.log('in confirm res');
     const { codeInput } = this.state;
     if (confirmResult && codeInput.length) {
       confirmResult
         .confirm(codeInput)
         .then(user => {
+          console.log('in then of comfirm code');
           this.setState({ message: 'Codeb  Confirmed!', loading: false });
+
           backend.addUsers({
-            number: this.props.navigation.state.params.number,
-            name: this.props.navigation.state.params.name,
+            phoneNumber: this.props.navigation.state.params.details.phoneNumber,
+            name: this.props.navigation.state.params.details.name,
             userId: user.uid
           });
 
@@ -54,21 +53,9 @@ class ConfirmCode extends Component {
         });
     }
   };
-  goToGroups = () => {
-    this.props.navigation.navigate('Group', {
-      userDetails: {
-        number: this.props.navigation.state.params.details.number,
-        name: this.props.navigation.state.params.details.name,
-        userId: 1 //user.uid
-      }
-    });
-  };
 
   render() {
     const { goBack } = this.props.navigation;
-    console.log('====================================');
-    console.log(this.props.navigation.state.params.details.phoneNumber);
-    console.log('====================================');
     return (
       <Container style={{ backgroundColor: '#dcdcdc' }}>
         <Image style={styles.imageContainer} source={imageurl} />
@@ -112,7 +99,7 @@ class ConfirmCode extends Component {
               borderRadius: 20,
               marginTop: 5
             }}
-            onPress={this.goToGroups}
+            onPress={this.confirmCode}
           >
             <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
           </TouchableOpacity>
