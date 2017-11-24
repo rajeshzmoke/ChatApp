@@ -134,7 +134,7 @@ class Group extends Component {
 
     return (
       <Container>
-        <Image style={styles.imageContainer} source={imageurl} />
+        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Row>
             <Body>

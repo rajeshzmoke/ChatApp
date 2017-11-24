@@ -19,7 +19,7 @@ class Users extends Component {
     const { goBack } = this.props.navigation;
     return (
       <Container>
-        <Image style={styles.imageContainer} source={imageurl} />
+        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Row>
             <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => goBack()}>

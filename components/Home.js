@@ -104,7 +104,7 @@ class Home extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Image style={styles.imageContainer} source={imageurl} />
+        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Body>
             <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
