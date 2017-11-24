@@ -36,7 +36,7 @@ class Home extends Component {
       codeInput: '',
       phoneNumber: '+91',
       confirmResult: null,
-      name: '',
+      userName: '',
       loading: false
     };
   }
@@ -55,7 +55,7 @@ class Home extends Component {
           codeInput: '',
           phoneNumber: '+91',
           confirmResult: null,
-          name: '',
+          userName: '',
           loading: false
         });
       }
@@ -116,14 +116,14 @@ class Home extends Component {
               <Label>Phone Number</Label>
               <Input
                 //autoFocus
-                keyboardType="numeric"
+                keyboardType="phone-pad"
                 onChangeText={value => this.setState({ phoneNumber: value })}
                 value={this.state.phoneNumber}
               />
             </Item>
             <Item floatingLabel style={{ borderBottomColor: 'black' }}>
               <Label>Enter Name</Label>
-              <Input onChangeText={text => this.setState({ name: text })} />
+              <Input onChangeText={text => this.setState({ userName: text })} />
             </Item>
           </Form>
 

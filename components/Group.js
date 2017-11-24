@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { Modal, View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { getFireBase } from '../components/FireHelper';
-import { Row, Col, Grid } from 'react-native-easy-grid';
+import { Row } from 'react-native-easy-grid';
 import {
   Container,
   Header,
   Body,
-  Footer,
   Button,
   Text,
-  Item,
-  Input,
   Title,
   Thumbnail,
   Icon,
@@ -23,13 +20,12 @@ import imageurl from '../components/images/ocean.jpg';
 import reactImage from '../components/images/img1.jpg';
 import getBackend from './Backend';
 import PopupDialog, {
-  DialogTitle,
-  DialogButton,
   SlideAnimation,
   ScaleAnimation,
   FadeAnimation
 } from 'react-native-popup-dialog';
 import { Dialog } from 'react-native-simple-dialogs';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const backend = getBackend();
 
@@ -49,20 +45,12 @@ class Group extends Component {
     groups: [],
     active: 'false',
     items: [],
-    modalVisible: false
+    loading: false
   };
 
   componentWillMount() {
     this.updateGroups();
   }
-
-  signOut = () => {
-    firebase.auth().signOut();
-    this.props.navigation.dispatch(navigateAction);
-    this.setState({
-      active: !this.state.active
-    });
-  };
 
   goToChat = groupKey => {
     const userDetails = this.props.navigation.state.params.userDetails;
@@ -77,7 +65,7 @@ class Group extends Component {
   };
 
   goToModal = () => {
-    console.log('usersadasdasd');
+    console.log('go to model');
     this.props.navigation.navigate('Modalview');
   };
 
@@ -108,7 +96,16 @@ class Group extends Component {
     );
   };
 
+  signOut = () => {
+    firebase.auth().signOut();
+    this.props.navigation.dispatch(navigateAction);
+    this.setState({
+      active: !this.state.active
+    });
+  };
+
   updateGroups = () => {
+    this.setState({ loading: true });
     console.log('in update groups');
     const userId = this.props.navigation.state.params.userDetails.userId;
     backend.getGroups(userId).then(snapshot => {
@@ -116,7 +113,8 @@ class Group extends Component {
       console.log(snapshot);
       console.log('================snapshot====================');
       this.setState({
-        items: snapshot
+        items: snapshot,
+        loading: false
       });
     });
   };
@@ -140,25 +138,11 @@ class Group extends Component {
         <Header style={styles.header}>
           <Row>
             <Body>
-              <Title style={{ color: 'black' }}>Welcome {state.params.userDetails.name}</Title>
+              <Title style={{ color: 'black' }}>Welcome {state.params.userDetails.userName}</Title>
             </Body>
           </Row>
         </Header>
-        <View>
-          {/* <View style={{ flexDirection: 'row' }}>
-            <Item style={{ flex: 1, borderBottomColor: 'black' }}>
-              <Input
-                style={{ justifyContent: 'center' }}
-                placeholder="Enter Group name"
-                onChangeText={text => this.setState({ grpName: text })}
-              />
-            </Item>
-
-            <Button small rounded dark style={styles.groupButton} onPress={this.addGroup}>
-              <Text style={{ fontWeight: '500' }}> Add Group </Text>
-            </Button>
-          </View> */}
-        </View>
+        <View />
         <View style={{ flex: 5, alignContent: 'stretch' }}>
           <List
             dataArray={this.state.items ? Object.keys(this.state.items) : []}
@@ -189,45 +173,26 @@ class Group extends Component {
               <TextInput
                 placeholder="Enter Group Name"
                 style={{
-                  marginTop: 10,
-                  width: '60%',
+                  height: 30,
+                  width: '50%',
                   borderBottomWidth: 2,
-                  borderBottomColor: 'black',
-                  textAlign: 'center'
+                  borderBottomColor: 'black'
                 }}
                 onChangeText={text => this.setState({ grpName: text })}
               />
 
-              <Body>
-                <Button
-                  small
-                  rounded
-                  dark
-                  style={{
-                    //padding: 10,
-                    width: '50%',
-                    backgroundColor: '#222',
-                    borderRadius: 20,
-                    marginTop: 5
-                  }}
-                  onPress={this.createGroup}
-                >
-                  <Text style={{ fontWeight: '500' }}> Add Group </Text>
-                </Button>
-              </Body>
-              <Footer style={{ height: '5%' }} />
-              {/* <TouchableOpacity
+              <TouchableOpacity
                 style={{
-                  padding: 10,
+                  padding: 5,
                   width: '50%',
                   backgroundColor: '#222',
                   borderRadius: 20,
                   marginTop: 5
                 }}
-                onPress={this.addGroup}
+                onPress={this.createGroup}
               >
                 <Title style={{ color: 'white' }}>Create Group</Title>
-              </TouchableOpacity> */}
+              </TouchableOpacity>
             </View>
           </Dialog>
         </View>
@@ -256,6 +221,12 @@ class Group extends Component {
             <Icon name="add" />
           </Button>
         </Fab>
+        <Spinner
+          visible={this.state.loading}
+          textContent={'Checking OTP...'}
+          textStyle={{ color: '#fff' }}
+          overlayColor="rgba(0, 0, 0, 0.6)"
+        />
       </Container>
     );
   }

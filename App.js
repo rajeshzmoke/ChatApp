@@ -49,7 +49,8 @@ const RootNavigation = StackNavigator(
       screen: Users,
       navigationOptions: ({ navigation }) => ({
         title: 'Users Page',
-        gesturesEnabled: false
+        gesturesEnabled: false,
+        header: null
       })
     }
   },

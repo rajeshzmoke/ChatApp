@@ -19,6 +19,7 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import { Row } from 'react-native-easy-grid';
 import getBackend from './Backend';
+import imageurl from '../components/images/face.jpg';
 
 const backend = getBackend();
 
@@ -35,7 +36,8 @@ class Chat extends Component {
     super(props);
     this.state = {
       messages: [],
-      isLoadingEarlier: false
+      isLoadingEarlier: false,
+      showuseravatar: false
     };
   }
 
@@ -54,10 +56,14 @@ class Chat extends Component {
   componentWillUnmount() {
     backend.closeChat();
   }
-  grpInfo = () => {
+  goToUserPage = () => {
+    console.log('================goToUserPage=================');
+    console.log(this.props.navigation.state.params.groupData);
+    console.log('==================goToUserPage==================');
     this.props.navigation.navigate('Users', {
-      groupName: this.props.navigation.state.params.groupData.groupName,
-      groupKey: this.props.navigation.state.params.groupData.groupKey
+      groupData: {
+        ...this.props.navigation.state.params.groupData
+      }
     });
   };
   render() {
@@ -71,8 +77,8 @@ class Chat extends Component {
     return (
       <Container style={styles.chatContainer}>
         <Header style={styles.header}>
-          <Left style={{ flex: 1 }}>
-            <Button
+          <Row>
+            {/* <Button
               transparent
               onPress={() => {
                 this.props.navigation.state.params.onNavigateBack();
@@ -80,16 +86,22 @@ class Chat extends Component {
               }}
             >
               <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
-            </Button>
-          </Left>
-          <Body style={{ flex: 1 }}>
-            <Button transparent onPress={this.grpInfo}>
-              <Title style={{ marginRight: 'auto', color: 'black' }}>
+            </Button> */}
+            <TouchableOpacity
+              style={{ paddingTop: 10 }}
+              onPress={() => {
+                this.props.navigation.state.params.onNavigateBack();
+                goBack();
+              }}
+            >
+              <Icon style={{ color: 'black' }} name="arrow-back" />
+            </TouchableOpacity>
+            <Button transparent onPress={this.goToUserPage}>
+              <Title style={{ marginLeft: 'auto', marginRight: 'auto', color: 'black' }}>
                 {this.props.navigation.state.params.groupData.groupName} Chat
               </Title>
             </Button>
-          </Body>
-          <Right style={{ flex: 1 }} />
+          </Row>
         </Header>
         <GiftedChat
           messages={this.state.messages}
@@ -100,7 +112,9 @@ class Chat extends Component {
             });
           }}
           isLoadingEarlier={this.state.isLoadingEarlier}
+          showUserAvatar={this.state.showuseravatar}
           user={{
+            showUserAvatar: true,
             id: this.props.navigation.state.params.groupData.userId,
             name: this.props.navigation.state.params.groupData.name
           }}

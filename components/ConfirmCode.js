@@ -16,8 +16,13 @@ class ConfirmCode extends Component {
     this.state = {
       codeInput: '',
       timer: 0,
-      loading: false
+      loading: false,
+      showTimer: true
     };
+  }
+
+  componentDidMount() {
+    this.setState({ showTimer: true });
   }
 
   confirmCode = () => {
@@ -31,16 +36,16 @@ class ConfirmCode extends Component {
           console.log('in then of comfirm code');
           this.setState({ message: 'Codeb  Confirmed!', loading: false });
 
-          backend.addUsers({
+          backend.createUsers({
             phoneNumber: this.props.navigation.state.params.details.phoneNumber,
-            name: this.props.navigation.state.params.details.name,
+            userName: this.props.navigation.state.params.details.userName,
             userId: user.uid
           });
 
           this.props.navigation.navigate('Group', {
             userDetails: {
-              number: this.props.navigation.state.params.details.number,
-              name: this.props.navigation.state.params.details.name,
+              phoneNumber: this.props.navigation.state.params.details.phoneNumber,
+              userName: this.props.navigation.state.params.details.userName,
               userId: user.uid
             }
           });
@@ -53,6 +58,17 @@ class ConfirmCode extends Component {
         });
     }
   };
+
+  renderTimer = () => (
+    <View>
+      <Button transparent dark onPress={this.startTimer}>
+        <Text>
+          Start s: {this.state.time.s}
+          {/* m: {this.state.time.m} */}
+        </Text>
+      </Button>
+    </View>
+  );
 
   render() {
     const { goBack } = this.props.navigation;
@@ -82,7 +98,7 @@ class ConfirmCode extends Component {
           }}
         >
           <TextInput
-            keyboardType="number-pad"
+            keyboardType="phone-pad"
             style={{
               borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
               padding: 4,
@@ -103,7 +119,8 @@ class ConfirmCode extends Component {
           >
             <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
           </TouchableOpacity>
-          <Timer />
+          {/* <Timer /> */}
+          {!this.state.showTimer && this.renderTimer()}
         </View>
         <Spinner
           visible={this.state.loading}
