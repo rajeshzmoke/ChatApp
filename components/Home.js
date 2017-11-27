@@ -44,8 +44,9 @@ class Home extends Component {
   componentDidMount() {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('====================================');
+        this.props.navigation.navigate('Groups', {});
         console.log('auto check');
+        console.log(user);
         console.log('====================================');
       } else {
         // User has been signed out, reset the state
@@ -150,7 +151,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#b0c4de'
+    //backgroundColor: '#b0c4de'
   },
   imageContainer: {
     position: 'absolute',

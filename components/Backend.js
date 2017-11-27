@@ -86,6 +86,8 @@ class Backend {
           user: message[i].user,
           createdAt: firebase.database.ServerValue.TIMESTAMP
         });
+      console.log('user id');
+      console.log(message[i].user);
     }
   };
 

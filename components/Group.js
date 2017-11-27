@@ -3,19 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } from 'rea
 import { NavigationActions } from 'react-navigation';
 import { getFireBase } from '../components/FireHelper';
 import { Row } from 'react-native-easy-grid';
-import {
-  Container,
-  Header,
-  Body,
-  Button,
-  Text,
-  Title,
-  Thumbnail,
-  Icon,
-  Fab,
-  List,
-  ListItem
-} from 'native-base';
+import { Container, Header, Body, Text, Title, Thumbnail, Icon, List, ListItem } from 'native-base';
 import imageurl from '../components/images/ocean.jpg';
 import reactImage from '../components/images/img1.jpg';
 import getBackend from './Backend';
@@ -26,6 +14,7 @@ import PopupDialog, {
 } from 'react-native-popup-dialog';
 import { Dialog } from 'react-native-simple-dialogs';
 import Spinner from 'react-native-loading-spinner-overlay';
+import ActionButton from 'react-native-action-button';
 
 const backend = getBackend();
 
@@ -196,31 +185,21 @@ class Group extends Component {
             </View>
           </Dialog>
         </View>
-        <Fab
-          active={!this.state.active}
-          direction="up"
-          containerStyle={{}}
-          style={{ backgroundColor: '#000000' }}
-          position="bottomRight"
-          onPress={() => this.setState({ active: !this.state.active })}
-        >
-          <Icon name="navigate" />
-          <Button style={{ backgroundColor: '#34A34F' }} onPress={this.signOut}>
-            <Icon name="log-out" />
-          </Button>
-          <Button style={{ backgroundColor: '#3B5998' }} onPress={this.goToUsers}>
-            <Icon name="contact" />
-          </Button>
-          <Button
-            style={{ backgroundColor: '#DD5144' }}
-            onPress={() => this.openDialog(true)
-            //this.slideAnimationDialog.show();
-            }
-            //this.slideAnimationDialog.show();
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item
+            buttonColor="#9b59b6"
+            title="New Group"
+            onPress={() => this.openDialog(true)}
           >
-            <Icon name="add" />
-          </Button>
-        </Fab>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          {/* <ActionButton.Item buttonColor="#3498db" title="User " onPress={() => {}}>
+            <Icon name="contact" style={styles.actionButtonIcon} />
+          </ActionButton.Item> */}
+          <ActionButton.Item buttonColor="#1abc9c" title="Logout" onPress={this.signOut}>
+            <Icon name="log-out" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
         <Spinner
           visible={this.state.loading}
           textContent={'Checking OTP...'}

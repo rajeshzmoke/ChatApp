@@ -105,9 +105,8 @@ class Chat extends Component {
           isLoadingEarlier={this.state.isLoadingEarlier}
           showUserAvatar={this.state.showuseravatar}
           user={{
-            showUserAvatar: true,
             id: this.props.navigation.state.params.groupData.userId,
-            name: this.props.navigation.state.params.groupData.name
+            name: this.props.navigation.state.params.groupData.userName
           }}
         />
       </Container>
