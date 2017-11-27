@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
     implementation 'com.google.firebase:firebase-auth:11.4.2'
     compile(project(':react-native-firebase')) {

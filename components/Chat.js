@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import { Row } from 'react-native-easy-grid';
 import getBackend from './Backend';
 import imageurl from '../components/images/face.jpg';
+import LinerGradient from 'react-native-linear-gradient';
 
 const backend = getBackend();
 
@@ -115,10 +116,10 @@ class Chat extends Component {
 }
 const styles = StyleSheet.create({
   chatContainer: {
-    backgroundColor: '#B8DBEE'
+    //backgroundColor: '#B8DBEE'
   },
   header: {
-    backgroundColor: '#87cefa'
+    // backgroundColor: '#87cefa'
   }
 });
 export default connect(state => ({ chat: state.chatReducer.chat }))(Chat);

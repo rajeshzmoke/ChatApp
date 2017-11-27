@@ -4,6 +4,7 @@ import { Container, Header, Body, Title, Left, Right, Text, Button, Icon } from 
 import { Row } from 'react-native-easy-grid';
 import getBackend from './Backend';
 import imageurl from '../components/images/ocean.jpg';
+import LinerGradient from 'react-native-linear-gradient';
 
 const backend = getBackend();
 
@@ -19,7 +20,6 @@ class Users extends Component {
     const { goBack } = this.props.navigation;
     return (
       <Container>
-        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Row>
             <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => goBack()}>
@@ -30,46 +30,63 @@ class Users extends Component {
             </Title>
           </Row>
         </Header>
-        <View
-          style={{
-            flexDirection: 'column',
-            height: '40%',
-            width: '100%',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <TextInput
-            keyboardType="phone-pad"
+        <LinerGradient colors={['white', 'black']}>
+          <View
             style={{
-              borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
-              padding: 4,
-              width: '60%',
-              textAlign: 'center'
-            }}
-            placeholder="Enter Anonymous number"
-            onChangeText={text => this.setState({ phoneNumber: text })}
-          />
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              width: '60%',
-              backgroundColor: '#333',
-              borderRadius: 20,
-              marginTop: 5,
-              alignItems: 'center'
-            }}
-            onPress={() => {
-              backend.checkForUsersInGroup({
-                ...this.props.navigation.state.params.groupData,
-                phoneNumber: this.state.phoneNumber
-              });
+              flexDirection: 'column',
+              height: '100%',
+              width: '100%',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
-            <Text style={{ color: '#fff', fontWeight: '400' }}> Add Anonymous User </Text>
-          </TouchableOpacity>
-        </View>
+            <View style={{ flex: 1, marginTop: 50 }}>
+              <TextInput
+                keyboardType="phone-pad"
+                style={{
+                  borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+                  padding: 4,
+                  width: '60%',
+                  textAlign: 'center'
+                }}
+                placeholder="Enter Anonymous number"
+                onChangeText={text => this.setState({ phoneNumber: text })}
+              />
+              <TouchableOpacity
+                style={{
+                  padding: 10,
+                  width: '60%',
+                  backgroundColor: '#333',
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  marginTop: 10
+                }}
+                onPress={() => {
+                  backend.checkForUsersInGroup({
+                    ...this.props.navigation.state.params.groupData,
+                    phoneNumber: this.state.phoneNumber
+                  });
+                }}
+              >
+                <Text style={{ color: '#fff', fontWeight: '400' }}> Add Anonymous User </Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                width: '35%',
+                backgroundColor: '#333',
+                borderRadius: 20,
+                marginBottom: 100,
+                alignItems: 'center'
+              }}
+              onPress={() => {}}
+            >
+              <Text style={{ color: '#fff', fontWeight: '400' }}> Leave Group </Text>
+            </TouchableOpacity>
+          </View>
+        </LinerGradient>
       </Container>
     );
   }
@@ -84,7 +101,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#87cefa'
+    //backgroundColor: '#87cefa'
   }
 });
 export default Users;

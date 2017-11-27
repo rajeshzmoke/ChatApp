@@ -12,6 +12,10 @@ target 'ChatApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'React', :path => '../node_modules/react-native'
+  
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'ChatAppTests' do
     inherit! :search_paths
     # Pods for testing

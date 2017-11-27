@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import {
   Container,
   Header,
@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getFireBase } from '../components/FireHelper';
 import imageurl from '../components/images/ocean.jpg';
+import LinerGradient from 'react-native-linear-gradient';
 
 const firebase = getFireBase();
 
@@ -104,40 +105,38 @@ class Home extends Component {
 
   render() {
     return (
-      <Container style={styles.container}>
-        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
+      <Container>
         <Header style={styles.header}>
           <Body>
             <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
           </Body>
         </Header>
-        <Content style={{ height: '100%' }}>
-          <Form>
-            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-              <Label>Phone Number</Label>
-              <Input
-                //autoFocus
-                keyboardType="phone-pad"
-                onChangeText={value => this.setState({ phoneNumber: value })}
-                value={this.state.phoneNumber}
-              />
-            </Item>
-            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-              <Label>Enter Name</Label>
-              <Input onChangeText={text => this.setState({ userName: text })} />
-            </Item>
-          </Form>
+        <LinerGradient colors={['white', 'black']}>
+          <View style={{ height: '100%' }}>
+            <Form>
+              <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+                <Label>Phone Number</Label>
+                <Input
+                  //autoFocus
+                  keyboardType="phone-pad"
+                  onChangeText={value => this.setState({ phoneNumber: value })}
+                  value={this.state.phoneNumber}
+                />
+              </Item>
+              <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+                <Label>Enter Name</Label>
+                <Input onChangeText={text => this.setState({ userName: text })} />
+              </Item>
+            </Form>
 
-          <View style={{ marginTop: 10 }}>
-            <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
-              <Text>Next</Text>
-              <Icon name="glasses" />
-            </Button>
-            {/* <Button transparent rounded dark style={styles.buttonText} onPress={this.otpCode}>
-              <Text> Signup</Text>
-            </Button> */}
+            <View style={{ marginTop: 10 }}>
+              <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
+                <Text>Next</Text>
+                <Icon name="glasses" />
+              </Button>
+            </View>
           </View>
-        </Content>
+        </LinerGradient>
         <Spinner
           visible={this.state.loading}
           textContent={'Logging in...'}
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#87cefa'
+    // backgroundColor: '#87cefa'
   },
   title2: {
     marginLeft: 20,

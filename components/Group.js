@@ -15,6 +15,7 @@ import PopupDialog, {
 import { Dialog } from 'react-native-simple-dialogs';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ActionButton from 'react-native-action-button';
+import LinearGradient from 'react-native-linear-gradient';
 
 const backend = getBackend();
 
@@ -123,7 +124,6 @@ class Group extends Component {
 
     return (
       <Container>
-        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Row>
             <Body>
@@ -131,60 +131,61 @@ class Group extends Component {
             </Body>
           </Row>
         </Header>
-        <View />
-        <View style={{ flex: 5, alignContent: 'stretch' }}>
-          <List
-            dataArray={this.state.items ? Object.keys(this.state.items) : []}
-            renderRow={item => (
-              <ListItem
-                button
-                avatar
-                style={{ padding: 5, backgroundColor: 'transparent' }}
-                onPress={() => {
-                  this.goToChat(item);
-                }}
-              >
-                <Thumbnail circular source={reactImage} />
-                <Body>
-                  <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>
-                    {this.state.items[item]}
-                  </Text>
-                </Body>
-              </ListItem>
-            )}
-          />
-          <Dialog
-            visible={this.state.showDialog}
-            //title="Add Group"
-            onTouchOutside={() => this.setState({ showDialog: false })}
-          >
-            <View style={{ flexDirection: 'column', flexWrap: 'wrap', alignItems: 'center' }}>
-              <TextInput
-                placeholder="Enter Group Name"
-                style={{
-                  height: 30,
-                  width: '50%',
-                  borderBottomWidth: 2,
-                  borderBottomColor: 'black'
-                }}
-                onChangeText={text => this.setState({ grpName: text })}
-              />
+        <LinearGradient colors={['white', 'black']} style={{ height: '100%' }}>
+          <View style={{ flex: 5, alignContent: 'stretch' }}>
+            <List
+              dataArray={this.state.items ? Object.keys(this.state.items) : []}
+              renderRow={item => (
+                <ListItem
+                  button
+                  avatar
+                  style={{ padding: 5, backgroundColor: 'transparent' }}
+                  onPress={() => {
+                    this.goToChat(item);
+                  }}
+                >
+                  <Thumbnail circular source={reactImage} />
+                  <Body>
+                    <Text style={{ fontFamily: 'Helvetica', fontWeight: '600' }}>
+                      {this.state.items[item]}
+                    </Text>
+                  </Body>
+                </ListItem>
+              )}
+            />
+            <Dialog
+              visible={this.state.showDialog}
+              //title="Add Group"
+              onTouchOutside={() => this.setState({ showDialog: false })}
+            >
+              <View style={{ flexDirection: 'column', flexWrap: 'wrap', alignItems: 'center' }}>
+                <TextInput
+                  placeholder="Enter Group Name"
+                  style={{
+                    height: 30,
+                    width: '50%',
+                    borderBottomWidth: 2,
+                    borderBottomColor: 'black'
+                  }}
+                  onChangeText={text => this.setState({ grpName: text })}
+                />
 
-              <TouchableOpacity
-                style={{
-                  padding: 5,
-                  width: '50%',
-                  backgroundColor: '#222',
-                  borderRadius: 20,
-                  marginTop: 5
-                }}
-                onPress={this.createGroup}
-              >
-                <Title style={{ color: 'white' }}>Create Group</Title>
-              </TouchableOpacity>
-            </View>
-          </Dialog>
-        </View>
+                <TouchableOpacity
+                  style={{
+                    padding: 5,
+                    width: '50%',
+                    backgroundColor: '#222',
+                    borderRadius: 20,
+                    marginTop: 5
+                  }}
+                  onPress={this.createGroup}
+                >
+                  <Title style={{ color: 'white' }}>Create Group</Title>
+                </TouchableOpacity>
+              </View>
+            </Dialog>
+          </View>
+        </LinearGradient>
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
             buttonColor="#9b59b6"
@@ -193,13 +194,11 @@ class Group extends Component {
           >
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
-          {/* <ActionButton.Item buttonColor="#3498db" title="User " onPress={() => {}}>
-            <Icon name="contact" style={styles.actionButtonIcon} />
-          </ActionButton.Item> */}
           <ActionButton.Item buttonColor="#1abc9c" title="Logout" onPress={this.signOut}>
             <Icon name="log-out" style={styles.actionButtonIcon} />
           </ActionButton.Item>
         </ActionButton>
+
         <Spinner
           visible={this.state.loading}
           textContent={'Checking OTP...'}
@@ -214,6 +213,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row'
   },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white'
+  },
   imageContainer: {
     position: 'absolute',
     top: 0,
@@ -223,7 +227,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    backgroundColor: '#87cefa'
+    //backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10,

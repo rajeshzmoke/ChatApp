@@ -6,6 +6,7 @@ import { Row, Col, Grid } from 'react-native-easy-grid';
 import imageurl from '../components/images/ocean.jpg';
 import Timer from './Timer';
 import getBackend from './Backend';
+import LinerGradient from 'react-native-linear-gradient';
 
 const backend = getBackend();
 
@@ -74,7 +75,6 @@ class ConfirmCode extends Component {
     const { goBack } = this.props.navigation;
     return (
       <Container style={{ backgroundColor: '#dcdcdc' }}>
-        {/* <Image style={styles.imageContainer} source={imageurl} /> */}
         <Header style={styles.header}>
           <Row>
             <Button transparent onPress={() => goBack()}>
@@ -86,42 +86,43 @@ class ConfirmCode extends Component {
             </Title>
           </Row>
         </Header>
-
-        <View
-          style={{
-            flexDirection: 'column',
-            height: '83%',
-            width: '100%',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <TextInput
-            keyboardType="phone-pad"
+        <LinerGradient colors={['white', 'black']} style={{ height: '100%' }}>
+          <View
             style={{
-              borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
-              padding: 4,
-              width: '40%',
-              textAlign: 'center'
+              flexDirection: 'column',
+              height: '70%',
+              width: '100%',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
-            placeholder="Enter OTP"
-            onChangeText={text => this.setState({ codeInput: text })}
-          />
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              backgroundColor: '#333',
-              borderRadius: 20,
-              marginTop: 5
-            }}
-            onPress={this.confirmCode}
           >
-            <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
-          </TouchableOpacity>
-          {/* <Timer /> */}
-          {!this.state.showTimer && this.renderTimer()}
-        </View>
+            <TextInput
+              keyboardType="phone-pad"
+              style={{
+                borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+                padding: 4,
+                width: '35%',
+                textAlign: 'center'
+              }}
+              placeholder="Enter OTP"
+              onChangeText={text => this.setState({ codeInput: text })}
+            />
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                backgroundColor: '#333',
+                borderRadius: 20,
+                marginTop: 5
+              }}
+              onPress={this.confirmCode}
+            >
+              <Text style={{ color: '#fff', fontWeight: '400' }}> Confirm OTP </Text>
+            </TouchableOpacity>
+            {/* <Timer /> */}
+            {!this.state.showTimer && this.renderTimer()}
+          </View>
+        </LinerGradient>
         <Spinner
           visible={this.state.loading}
           textContent={'Checking OTP...'}
@@ -145,8 +146,8 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    flexDirection: 'row',
-    backgroundColor: '#87cefa'
+    flexDirection: 'row'
+    //backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10,
