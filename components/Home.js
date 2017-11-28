@@ -111,13 +111,8 @@ class Home extends Component {
           <Body>
             <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
           </Body>
-<<<<<<< HEAD
-        </Header>
-        <LinerGradient colors={['white', '#87cefa']}>
-=======
         </Header> */}
         <LinerGradient colors={['white', 'black']}>
->>>>>>> ea75982af3418e78fd10c3a0951640ec918505e4
           <View style={{ height: '100%' }}>
             <Form>
               <Item floatingLabel style={{ borderBottomColor: 'black' }}>
