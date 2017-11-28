@@ -159,11 +159,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-<<<<<<< HEAD
-    backgroundColor: '#87cefa'
-=======
     backgroundColor: '#a9a9a9'
->>>>>>> ea75982af3418e78fd10c3a0951640ec918505e4
   },
   title2: {
     marginLeft: 20,
