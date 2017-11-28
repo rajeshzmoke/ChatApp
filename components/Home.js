@@ -97,12 +97,6 @@ class Home extends Component {
   otpCode = () => {
     this.props.navigation.navigate('ConfirmCode', { details: this.state });
   };
-  // goToConfirmCode = () => {
-  //   this.props.navigation.navigate('ConfirmCode', {
-  //     home: this.state.confirmResult,
-  //     details: this.state
-  //   });
-  // };
 
   render() {
     return (
@@ -133,7 +127,7 @@ class Home extends Component {
             <View style={{ marginTop: 10 }}>
               <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
                 <Text>Next</Text>
-                <Icon name="glasses" />
+                <Icon name="arrow-forward" />
               </Button>
             </View>
           </View>

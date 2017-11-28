@@ -180,6 +180,22 @@ class Backend {
       .child(groupInfo.groupKey)
       .set(groupInfo.groupName);
   };
+  getUsersOfGroups = groupInfo => {
+    // firebase
+    //   .database()
+    //   .ref()
+
+    const rootRef = firebase.database.ref();
+    const urlRef = rootRef
+      .child('Groups')
+      .child(groupInfo.groupKey)
+      .child('members');
+    urlRef.once('value', snapshot => {
+      snapshot.forEach(child => {
+        console.log(`${child.key}: ${child.val()}`);
+      });
+    });
+  };
 
   exitGroup = groupInfo => {
     console.log('exitGroup');

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, Platform, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Platform,
+  Image,
+  StyleSheet,
+  FlatList
+} from 'react-native';
 import { Container, Header, Body, Title, Left, Right, Text, Button, Icon } from 'native-base';
 import { Row } from 'react-native-easy-grid';
 import getBackend from './Backend';
@@ -13,9 +21,12 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phoneNumber: ''
+      phoneNumber: '',
+      members: []
     };
   }
+
+  componentWillMount() {}
 
   render() {
     const { goBack } = this.props.navigation;
@@ -47,7 +58,7 @@ class Users extends Component {
               justifyContent: 'center'
             }}
           >
-            <View style={{ flex: 1, marginTop: 50 }}>
+            <View style={{ marginTop: 50 }}>
               <TextInput
                 keyboardType="phone-pad"
                 style={{
@@ -77,6 +88,12 @@ class Users extends Component {
               >
                 <Text style={{ color: '#fff', fontWeight: '400' }}> Add Anonymous User </Text>
               </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1, marginTop: 20 }}>
+              <FlatList
+                data={[{ key: 'a' }, { key: 'b' }]}
+                renderItem={({ item }) => <Text>{item.key}</Text>}
+              />
             </View>
             <TouchableOpacity
               style={{
