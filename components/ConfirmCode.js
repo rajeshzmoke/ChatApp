@@ -86,7 +86,7 @@ class ConfirmCode extends Component {
             </Title>
           </Row>
         </Header>
-        <LinerGradient colors={['white', 'black']} style={{ height: '100%' }}>
+        <LinerGradient colors={['white', '#87cefa']} style={{ height: '100%' }}>
           <View
             style={{
               flexDirection: 'column',
@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    flexDirection: 'row'
-    //backgroundColor: '#87cefa'
+    flexDirection: 'row',
+    backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10,

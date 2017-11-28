@@ -111,7 +111,7 @@ class Home extends Component {
             <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
           </Body>
         </Header>
-        <LinerGradient colors={['white', 'black']}>
+        <LinerGradient colors={['white', '#87cefa']}>
           <View style={{ height: '100%' }}>
             <Form>
               <Item floatingLabel style={{ borderBottomColor: 'black' }}>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    // backgroundColor: '#87cefa'
+    backgroundColor: '#87cefa'
   },
   title2: {
     marginLeft: 20,
