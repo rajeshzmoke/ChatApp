@@ -58,12 +58,13 @@ class Chat extends Component {
     backend.closeChat();
   }
   goToUserPage = () => {
-    console.log(this.props.navigation.state.key);
+    console.log('================goToUserPage=================');
     console.log(this.props.navigation.state.params.groupData);
     console.log('==================goToUserPage==================');
     this.props.navigation.navigate('Users', {
       groupData: {
-        ...this.props.navigation.state.params.groupData
+        ...this.props.navigation.state.params.groupData,
+        groupPageKey: this.props.navigation.state.key
       }
     });
   };

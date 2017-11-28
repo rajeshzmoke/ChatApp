@@ -21,7 +21,7 @@ class Users extends Component {
     const { goBack } = this.props.navigation;
 
     const backAction = NavigationActions.back({
-      key: 'id-1511854834746-3'
+      key: this.props.navigation.state.params.groupData.groupPageKey
     });
 
     return (
@@ -88,14 +88,12 @@ class Users extends Component {
                 alignItems: 'center'
               }}
               onPress={() => {
-                console.log(this.props.navigation.state.key);
-                this.props.navigation.dispatch(backAction);
-                // backend.exitGroup(
-                //   {
-                //     ...this.props.navigation.state.params.groupData
-                //   },
-                //   this.props.navigation.dispatch(backAction)
-                // );
+                backend.exitGroup(
+                  {
+                    ...this.props.navigation.state.params.groupData
+                  },
+                  this.props.navigation.dispatch(backAction)
+                );
               }}
             >
               <Text style={{ color: '#fff', fontWeight: '400' }}> Leave Group </Text>
