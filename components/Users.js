@@ -36,7 +36,7 @@ class Users extends Component {
             </Title>
           </Row>
         </Header>
-        <LinerGradient colors={['white', 'black']}>
+        <LinerGradient colors={['white', '#87cefa']}>
           <View
             style={{
               flexDirection: 'column',
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    //backgroundColor: '#87cefa'
+    backgroundColor: '#87cefa'
   }
 });
 export default Users;

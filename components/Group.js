@@ -134,7 +134,7 @@ class Group extends Component {
             </Body>
           </Row>
         </Header>
-        <LinearGradient colors={['white', 'black']} style={{ height: '100%' }}>
+        <LinearGradient colors={['white', '#87cefa']} style={{ height: '100%' }}>
           <View style={{ flex: 5, alignContent: 'stretch' }}>
             <List
               dataArray={this.state.items ? Object.keys(this.state.items) : []}
@@ -204,7 +204,7 @@ class Group extends Component {
 
         <Spinner
           visible={this.state.loading}
-          textContent={'Checking OTP...'}
+          textContent={'Loading Groups...'}
           textStyle={{ color: '#fff' }}
           overlayColor="rgba(0, 0, 0, 0.6)"
         />
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
-    //backgroundColor: '#87cefa'
+    backgroundColor: '#87cefa'
   },
   groupButton: {
     margin: 10,
