@@ -119,7 +119,7 @@ class Chat extends Component {
 }
 const styles = StyleSheet.create({
   chatContainer: {
-    // backgroundColor: '#87cefa'
+    backgroundColor: '#add8e6'
   },
   header: {
     backgroundColor: '#87cefa'
