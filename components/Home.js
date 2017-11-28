@@ -25,7 +25,8 @@ const firebase = getFireBase();
 
 class Home extends Component {
   static navigationOptions = {
-    header: null
+    //header: null
+    title: 'Join Anonymous Chat'
   };
 
   constructor(props) {
@@ -106,12 +107,17 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <Header style={styles.header}>
+        {/* <Header style={styles.header}>
           <Body>
-            <Title style={{ color: 'black' }}>Join Anonymous Chat</Title>
+            <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
           </Body>
+<<<<<<< HEAD
         </Header>
         <LinerGradient colors={['white', '#87cefa']}>
+=======
+        </Header> */}
+        <LinerGradient colors={['white', 'black']}>
+>>>>>>> ea75982af3418e78fd10c3a0951640ec918505e4
           <View style={{ height: '100%' }}>
             <Form>
               <Item floatingLabel style={{ borderBottomColor: 'black' }}>
@@ -149,9 +155,6 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    //backgroundColor: '#b0c4de'
-  },
   imageContainer: {
     position: 'absolute',
     top: 0,
@@ -161,7 +164,11 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header: {
+<<<<<<< HEAD
     backgroundColor: '#87cefa'
+=======
+    backgroundColor: '#a9a9a9'
+>>>>>>> ea75982af3418e78fd10c3a0951640ec918505e4
   },
   title2: {
     marginLeft: 20,

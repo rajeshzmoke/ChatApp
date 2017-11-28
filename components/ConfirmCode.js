@@ -70,6 +70,7 @@ class ConfirmCode extends Component {
       </Button>
     </View>
   );
+  517648;
 
   render() {
     const { goBack } = this.props.navigation;
@@ -77,12 +78,19 @@ class ConfirmCode extends Component {
       <Container style={{ backgroundColor: '#dcdcdc' }}>
         <Header style={styles.header}>
           <Row>
-            <Button transparent onPress={() => goBack()}>
+            {/* <Button transparent onPress={() => goBack()}>
               <Icon style={{ fontSize: 20, color: 'black' }} name="arrow-back" />
             </Button>
 
             <Title style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
               {`OTP sent to ${this.props.navigation.state.params.details.phoneNumber}`}
+            </Title> */}
+
+            <TouchableOpacity style={{ paddingTop: 10 }} onPress={() => goBack()}>
+              <Icon style={{ fontSize: 30, color: 'black' }} name="arrow-back" />
+            </TouchableOpacity>
+            <Title style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
+              OTP sent to {this.props.navigation.state.params.details.phoneNumber}
             </Title>
           </Row>
         </Header>
