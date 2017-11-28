@@ -12,7 +12,12 @@ const RootNavigation = StackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        //header: null
+        headerStyle: {
+          backgroundColor: '#696969'
+        },
+        headerTitleStyle: {
+          color: 'white'
+        },
         gesturesEnabled: false
       })
     },

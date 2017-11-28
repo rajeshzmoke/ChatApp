@@ -5,6 +5,7 @@ import { Row } from 'react-native-easy-grid';
 import getBackend from './Backend';
 import imageurl from '../components/images/ocean.jpg';
 import LinerGradient from 'react-native-linear-gradient';
+import { NavigationActions } from 'react-navigation';
 
 const backend = getBackend();
 
@@ -18,6 +19,11 @@ class Users extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
+
+    const backAction = NavigationActions.back({
+      key: 'id-1511854834746-3'
+    });
+
     return (
       <Container>
         <Header style={styles.header}>
@@ -81,7 +87,16 @@ class Users extends Component {
                 marginBottom: 100,
                 alignItems: 'center'
               }}
-              onPress={() => {}}
+              onPress={() => {
+                console.log(this.props.navigation.state.key);
+                this.props.navigation.dispatch(backAction);
+                // backend.exitGroup(
+                //   {
+                //     ...this.props.navigation.state.params.groupData
+                //   },
+                //   this.props.navigation.dispatch(backAction)
+                // );
+              }}
             >
               <Text style={{ color: '#fff', fontWeight: '400' }}> Leave Group </Text>
             </TouchableOpacity>

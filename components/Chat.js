@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   Container,
   Header,
@@ -58,7 +58,7 @@ class Chat extends Component {
     backend.closeChat();
   }
   goToUserPage = () => {
-    console.log('================goToUserPage=================');
+    console.log(this.props.navigation.state.key);
     console.log(this.props.navigation.state.params.groupData);
     console.log('==================goToUserPage==================');
     this.props.navigation.navigate('Users', {
@@ -88,10 +88,12 @@ class Chat extends Component {
             >
               <Icon style={{ color: 'black' }} name="arrow-back" />
             </TouchableOpacity>
-            <Button transparent onPress={this.goToUserPage}>
-              <Title style={{ marginLeft: 'auto', marginRight: 'auto', color: 'black' }}>
-                {this.props.navigation.state.params.groupData.groupName} Chat
-              </Title>
+            <Button
+              transparent
+              onPress={this.goToUserPage}
+              style={{ marginLeft: 'auto', marginRight: 'auto' }}
+            >
+              <Title>{this.props.navigation.state.params.groupData.groupName} Chat</Title>
             </Button>
           </Row>
         </Header>
@@ -116,7 +118,7 @@ class Chat extends Component {
 }
 const styles = StyleSheet.create({
   chatContainer: {
-    //backgroundColor: '#B8DBEE'
+    backgroundColor: '#a9a9a9'
   },
   header: {
     // backgroundColor: '#87cefa'

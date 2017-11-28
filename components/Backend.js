@@ -181,6 +181,18 @@ class Backend {
       .set(groupInfo.groupName);
   };
 
+  exitGroup = groupInfo => {
+    console.log('exitGroup');
+    console.log(groupInfo.groupKey);
+    firebase
+      .database()
+      .ref()
+      .child('Users')
+      .child(groupInfo.userId)
+      .child('groups')
+      .child(groupInfo.groupKey)
+      .remove();
+  };
   //close the connection to the backend
 
   closeChat = () => {

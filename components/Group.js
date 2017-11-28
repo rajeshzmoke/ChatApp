@@ -30,14 +30,16 @@ const navigateAction = NavigationActions.navigate({
 const firebase = getFireBase();
 
 class Group extends Component {
-  state = {
-    grpName: '',
-    groups: [],
-    active: 'false',
-    items: [],
-    loading: false
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      grpName: '',
+      groups: [],
+      active: 'false',
+      items: [],
+      loading: false
+    };
+  }
   componentWillMount() {
     this.updateGroups();
   }
@@ -96,7 +98,8 @@ class Group extends Component {
 
   updateGroups = () => {
     this.setState({ loading: true });
-    console.log('in update groups');
+    console.log('in update groups and its the keys bleow');
+    console.log(this.props.navigation.state.key);
     const userId = this.props.navigation.state.params.userDetails.userId;
     backend.getGroups(userId).then(snapshot => {
       console.log('================snapshot====================');
