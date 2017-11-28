@@ -118,10 +118,10 @@ class Chat extends Component {
 }
 const styles = StyleSheet.create({
   chatContainer: {
-    backgroundColor: '#a9a9a9'
+    // backgroundColor: '#87cefa'
   },
   header: {
-    // backgroundColor: '#87cefa'
+    backgroundColor: '#87cefa'
   }
 });
 export default connect(state => ({ chat: state.chatReducer.chat }))(Chat);
