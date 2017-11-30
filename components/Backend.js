@@ -1,4 +1,5 @@
 import { getFireBase } from '../components/FireHelper';
+import { Alert } from 'react-native';
 
 const firebase = getFireBase();
 let backendInstance = null;
@@ -59,6 +60,9 @@ class Backend {
     this.messagesRef.off();
     const onReceive = data => {
       const message = data.val();
+      console.log('===============loading ID=====================');
+      console.log(firebase.auth().currentUser.uid);
+      console.log('===============loading ID==================');
       callback({
         _id: data.key,
         text: message.text,

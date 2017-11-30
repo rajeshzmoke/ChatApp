@@ -30,7 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
             new LinearGradientPackage(),
             new VectorIconsPackage(),
             new RNFirebasePackage(),
-      new RNFirebaseAuthPackage()
+              new RNFirebaseAuthPackage()
       );
     }
 

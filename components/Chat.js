@@ -106,11 +106,9 @@ class Chat extends Component {
               groupKey: this.props.navigation.state.params.groupData.groupKey
             });
           }}
-          isLoadingEarlier={this.state.isLoadingEarlier}
-          showUserAvatar={this.state.showuseravatar}
           user={{
-            id: this.props.navigation.state.params.groupData.userId,
-            name: this.props.navigation.state.params.groupData.userName
+            id: this.props.navigation.state.params.groupData.userId
+            //name: this.props.navigation.state.params.groupData.userName
           }}
         />
       </Container>
@@ -119,7 +117,7 @@ class Chat extends Component {
 }
 const styles = StyleSheet.create({
   chatContainer: {
-    backgroundColor: '#add8e6'
+    backgroundColor: 'grey'
   },
   header: {
     backgroundColor: '#87cefa'

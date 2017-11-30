@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, AsyncStorage } from 'react-native';
 import {
   Container,
   Header,
@@ -31,7 +31,6 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.unsubscribe = null;
     this.state = {
       user: null,
       message: '',
@@ -39,31 +38,48 @@ class Home extends Component {
       phoneNumber: '+91',
       confirmResult: null,
       userName: '',
-      loading: false
+      loading: false,
+      // authenticated: false,
+      userId: ''
     };
-  }
-
-  componentDidMount() {
+    this.unsubscribe = null;
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.navigate('Groups', {});
-        console.log('auto check');
-        console.log(user);
-        console.log('====================================');
-      } else {
-        // User has been signed out, reset the state
         this.setState({
-          user: null,
-          message: '',
-          codeInput: '',
-          phoneNumber: '+91',
-          confirmResult: null,
-          userName: '',
-          loading: false
+          authenticated: true,
+          userId: user.uid
         });
+      } else {
+        console.log('No user');
       }
     });
+    this.homeView = this.homeView.bind(this);
+    this.goToGroups = this.goToGroups.bind(this);
   }
+
+  // componentDidMount() {
+  //   this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.props.navigation.navigate('Groups', {
+  //         details: user
+  //       });
+  //       console.log('auto check');
+  //       console.log(user);
+  //       console.log('====================================');
+  //     } else {
+  //       // User has been signed out, reset the state
+  //       this.setState({
+  //         user: null,
+  //         message: '',
+  //         codeInput: '',
+  //         phoneNumber: '+91',
+  //         confirmResult: null,
+  //         userName: '',
+  //         loading: false
+  //       });
+  //     }
+  //   });
+  // }
 
   componentWillUnmount() {
     if (this.unsubscribe) this.unsubscribe();
@@ -92,52 +108,71 @@ class Home extends Component {
           loading: false
         });
       });
+    // await AsyncStorage.setItem("PhoneNumber", phoneNumber);
+    // await AsyncStorage.setItem("Name", this.state.userName);
   };
 
   otpCode = () => {
     this.props.navigation.navigate('ConfirmCode', { details: this.state });
   };
 
+  goToGroups = () => {
+    this.props.navigation.navigate('Group', {
+      userDetails: {
+        phoneNumber: '+918123621085',
+        userName: 'Rajesh',
+        userId: this.state.userId
+      }
+    });
+  };
+  homeView = () => (
+    <View>
+      <Header style={styles.header}>
+        <Body>
+          <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
+        </Body>
+      </Header>
+      <LinerGradient colors={['white', '#87cefa']}>
+        <View style={{ height: '100%' }}>
+          <Form>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Phone Number</Label>
+              <Input
+                //autoFocus
+                keyboardType="phone-pad"
+                onChangeText={value => this.setState({ phoneNumber: value })}
+                value={this.state.phoneNumber}
+              />
+            </Item>
+            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+              <Label>Enter Name</Label>
+              <Input onChangeText={text => this.setState({ userName: text })} />
+            </Item>
+          </Form>
+
+          <View style={{ marginTop: 10 }}>
+            <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
+              <Text>Next</Text>
+              <Icon name="arrow-forward" />
+            </Button>
+          </View>
+        </View>
+      </LinerGradient>
+      <Spinner
+        visible={this.state.loading}
+        textContent={'Logging in...'}
+        textStyle={{ color: '#fff' }}
+        overlayColor="rgba(0, 0, 0, 0.6)"
+      />
+    </View>
+  );
+
   render() {
+    const { authenticated } = this.state;
     return (
       <Container>
-        <Header style={styles.header}>
-          <Body>
-            <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
-          </Body>
-        </Header>
-        <LinerGradient colors={['white', '#87cefa']}>
-          <View style={{ height: '100%' }}>
-            <Form>
-              <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-                <Label>Phone Number</Label>
-                <Input
-                  //autoFocus
-                  keyboardType="phone-pad"
-                  onChangeText={value => this.setState({ phoneNumber: value })}
-                  value={this.state.phoneNumber}
-                />
-              </Item>
-              <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-                <Label>Enter Name</Label>
-                <Input onChangeText={text => this.setState({ userName: text })} />
-              </Item>
-            </Form>
-
-            <View style={{ marginTop: 10 }}>
-              <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
-                <Text>Next</Text>
-                <Icon name="arrow-forward" />
-              </Button>
-            </View>
-          </View>
-        </LinerGradient>
-        <Spinner
-          visible={this.state.loading}
-          textContent={'Logging in...'}
-          textStyle={{ color: '#fff' }}
-          overlayColor="rgba(0, 0, 0, 0.6)"
-        />
+        {authenticated && this.goToGroups()}
+        {!authenticated && this.homeView()}
       </Container>
     );
   }
