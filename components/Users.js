@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
-  Image,
+  Alert,
   StyleSheet,
   FlatList
 } from 'react-native';
@@ -84,6 +84,11 @@ class Users extends Component {
                     ...this.props.navigation.state.params.groupData,
                     phoneNumber: this.state.phoneNumber
                   });
+                  if (!this.state.phoneNumber) {
+                    Alert.alert('User Added');
+                  } else {
+                    Alert.alert('Enter PhoneNumber');
+                  }
                 }}
               >
                 <Text style={{ color: '#fff', fontWeight: '400' }}> Add Anonymous User </Text>
