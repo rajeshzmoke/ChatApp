@@ -38,11 +38,10 @@ class Home extends Component {
       confirmResult: null,
       userName: '',
       loading: false,
-      // authenticated: false,
+
       userId: ''
     };
-    this.unsubscribe = null;
-    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
           authenticated: true,
@@ -52,8 +51,8 @@ class Home extends Component {
         console.log('No user');
       }
     });
-    this.homeView = this.homeView.bind(this);
-    this.goToGroups = this.goToGroups.bind(this);
+    // this.homeView = this.homeView.bind(this);
+    // this.goToGroups = this.goToGroups.bind(this);
   }
 
   // componentDidMount() {
@@ -80,9 +79,7 @@ class Home extends Component {
   //   });
   // }
 
-  componentWillUnmount() {
-    if (this.unsubscribe) this.unsubscribe();
-  }
+  componentWillUnmount() {}
 
   signIn = () => {
     console.log('in sign in');
@@ -124,59 +121,63 @@ class Home extends Component {
       }
     });
   };
-  homeView = () => (
-    <View>
-      <Header style={styles.header}>
-        <Body>
-          <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
-        </Body>
-      </Header>
-      <LinerGradient colors={['white', '#00bfff']}>
-        <View style={{ height: '100%' }}>
-          <Form>
-            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-              <Label>Phone Number</Label>
-              <Input
-                //autoFocus
-                keyboardType="phone-pad"
-                ref="PhoneNumber"
-                onChangeText={value => this.setState({ phoneNumber: value })}
-                value={this.state.phoneNumber}
-              />
-            </Item>
-            <Item floatingLabel style={{ borderBottomColor: 'black' }}>
-              <Label>Enter Name</Label>
-              <Input ref="EnterName" onChangeText={text => this.setState({ userName: text })} />
-            </Item>
-          </Form>
-
-          <View style={{ marginTop: 10 }}>
-            <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
-              <Text>Next</Text>
-              <Icon name="arrow-forward" />
-            </Button>
-          </View>
-        </View>
-      </LinerGradient>
-      <Spinner
-        visible={this.state.loading}
-        textContent={'Logging in...'}
-        textStyle={{ color: '#fff' }}
-        overlayColor="rgba(0, 0, 0, 0.6)"
-      />
-    </View>
-  );
 
   render() {
     const { authenticated } = this.state;
     return (
-      <Container>
+      <View style={{ flex: 1 }}>
         {authenticated && this.goToGroups()}
-        {!authenticated && this.homeView()}
-      </Container>
+        {!authenticated && (
+          <Container>
+            <Header style={styles.header}>
+              <Body>
+                <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
+              </Body>
+            </Header>
+            <LinerGradient colors={['white', '#00bfff']}>
+              <View style={{ height: '100%' }}>
+                <Form>
+                  <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+                    <Label>Phone Number</Label>
+                    <Input
+                      //autoFocus
+                      keyboardType="phone-pad"
+                      ref="PhoneNumber"
+                      onChangeText={value => this.setState({ phoneNumber: value })}
+                      value={this.state.phoneNumber}
+                    />
+                  </Item>
+                  <Item floatingLabel style={{ borderBottomColor: 'black' }}>
+                    <Label>Enter Name</Label>
+                    <Input
+                      ref="EnterName"
+                      onChangeText={text => this.setState({ userName: text })}
+                    />
+                  </Item>
+                </Form>
+
+                <View style={{ marginTop: 10 }}>
+                  <Button rounded dark style={styles.buttonText} onPress={this.signIn}>
+                    <Text>Next</Text>
+                    <Icon name="arrow-forward" />
+                  </Button>
+                </View>
+              </View>
+            </LinerGradient>
+            <Spinner
+              visible={this.state.loading}
+              textContent={'Logging in...'}
+              textStyle={{ color: '#fff' }}
+              overlayColor="rgba(0, 0, 0, 0.6)"
+            />
+          </Container>
+        )}
+      </View>
     );
   }
 }
+// {authenticated && this.goToGroups()}
+// {!authenticated && this.homeView()}
 
 const styles = StyleSheet.create({
   imageContainer: {
