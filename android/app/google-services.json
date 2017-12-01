@@ -48,15 +48,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "170852024080-pn3pfi7hjvgqams1u82lv7j2rrf5lqd7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "170852024080-14l66hrtgbmsfje95lng79u22jib2jrf.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "org.reactjs.native.example.ChatApp"
               }
-            },
-            {
-              "client_id": "170852024080-pn3pfi7hjvgqams1u82lv7j2rrf5lqd7.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },

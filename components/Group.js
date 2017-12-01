@@ -134,7 +134,7 @@ class Group extends Component {
             </Body>
           </Row>
         </Header>
-        <LinearGradient colors={['white', '#87cefa']} style={{ height: '100%' }}>
+        <LinearGradient colors={['white', '#00bfff']} style={{ height: '100%' }}>
           <View style={{ flex: 5, alignContent: 'stretch' }}>
             <List
               dataArray={this.state.items ? Object.keys(this.state.items) : []}

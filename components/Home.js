@@ -4,7 +4,6 @@ import {
   Container,
   Header,
   Body,
-  Content,
   Button,
   Text,
   Icon,
@@ -132,7 +131,7 @@ class Home extends Component {
           <Title style={{ color: 'white' }}>Join Anonymous Chat</Title>
         </Body>
       </Header>
-      <LinerGradient colors={['white', '#87cefa']}>
+      <LinerGradient colors={['white', '#00bfff']}>
         <View style={{ height: '100%' }}>
           <Form>
             <Item floatingLabel style={{ borderBottomColor: 'black' }}>
@@ -140,13 +139,14 @@ class Home extends Component {
               <Input
                 //autoFocus
                 keyboardType="phone-pad"
+                ref="PhoneNumber"
                 onChangeText={value => this.setState({ phoneNumber: value })}
                 value={this.state.phoneNumber}
               />
             </Item>
             <Item floatingLabel style={{ borderBottomColor: 'black' }}>
               <Label>Enter Name</Label>
-              <Input onChangeText={text => this.setState({ userName: text })} />
+              <Input ref="EnterName" onChangeText={text => this.setState({ userName: text })} />
             </Item>
           </Form>
 

@@ -47,7 +47,7 @@ class Users extends Component {
             </Title>
           </Row>
         </Header>
-        <LinerGradient colors={['white', '#87cefa']}>
+        <LinerGradient colors={['white', '#00bfff']}>
           <View
             style={{
               flexDirection: 'column',

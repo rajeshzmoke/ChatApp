@@ -75,7 +75,7 @@ class ConfirmCode extends Component {
   render() {
     const { goBack } = this.props.navigation;
     return (
-      <Container style={{ backgroundColor: '#dcdcdc' }}>
+      <Container style={{ backgroundColor: '#00bfff' }}>
         <Header style={styles.header}>
           <Row>
             {/* <Button transparent onPress={() => goBack()}>
